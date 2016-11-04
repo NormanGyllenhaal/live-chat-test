@@ -19,7 +19,6 @@ public class App implements Serializable {
     }
 
     @Id
-
     private Integer id;
 
     /**

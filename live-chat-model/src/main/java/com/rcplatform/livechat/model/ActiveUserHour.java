@@ -7,13 +7,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_active_user_hour")
-
 public class ActiveUserHour implements Serializable {
     /**
      * 主键
      */
     @Id
-
     private Integer id;
 
     /**

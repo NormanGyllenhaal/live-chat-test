@@ -1,7 +1,5 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -10,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_user_report")
-
 public class UserReport implements Serializable {
 
     public UserReport() {
@@ -27,28 +24,24 @@ public class UserReport implements Serializable {
     }
 
     @Id
-
     private Integer id;
 
     /**
      * 用户id
      */
     @Column(name = "user_id")
-
     private Integer userId;
 
     /**
      * 举报的用户id
      */
     @Column(name = "report_user_id")
-
     private Integer reportUserId;
 
     /**
      * 创建时间
      */
     @Column(name = "create_time")
-
     private Date createTime;
 
     private static final long serialVersionUID = 1L;

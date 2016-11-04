@@ -1,15 +1,15 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Table(name = "rc_language")
 
 public class Language implements Serializable {
     @Id
-
     private Integer id;
 
     @Column(name = "language_ab")

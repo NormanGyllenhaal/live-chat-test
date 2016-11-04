@@ -12,7 +12,6 @@ public class UserPayRecordAdminDto {
 
 
     @Id
-
     private Integer id;
 
     /**

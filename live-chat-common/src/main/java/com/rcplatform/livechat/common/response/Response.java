@@ -1,14 +1,12 @@
 package com.rcplatform.livechat.common.response;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
 
 import java.io.Serializable;
 
 /**
  * Created by yangpeng on 2016/7/13.
  */
-@GaeaSerializable
+
 public class Response<T> implements Serializable {
 
     public Response() {
@@ -25,13 +23,13 @@ public class Response<T> implements Serializable {
         this.msg = msg;
     }
 
-    @GaeaMember
+
     private T body;
 
-    @GaeaMember
+
     private Integer status;
 
-    @GaeaMember
+
     private String msg;
 
     public T getBody() {

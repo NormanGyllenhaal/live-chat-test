@@ -1,7 +1,6 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
+
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -49,7 +48,6 @@ public class User implements Serializable {
      * 主键
      */
     @Id
-
     @GeneratedValue(generator = "JDBC")
     private Integer id;
 

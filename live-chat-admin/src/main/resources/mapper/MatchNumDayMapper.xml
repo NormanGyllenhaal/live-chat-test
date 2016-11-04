@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcplatform.livechat.mapper.MatchNumDayMapper">
+  <resultMap id="BaseResultMap" type="com.rcplatform.livechat.model.MatchNumDay">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="match_fail" jdbcType="INTEGER" property="matchFail" />
+    <result column="match_success" jdbcType="INTEGER" property="matchSuccess" />
+    <result column="match_total" jdbcType="INTEGER" property="matchTotal" />
+    <result column="match_boy_count" jdbcType="INTEGER" property="matchBoyCount" />
+    <result column="match_girl_count" jdbcType="INTEGER" property="matchGirlCount" />
+    <result column="match_girl_girl_count" jdbcType="INTEGER" property="matchGirlGirlCount" />
+    <result column="match_boy_girl_count" jdbcType="INTEGER" property="matchBoyGirlCount" />
+    <result column="match_boy_boy_count" jdbcType="INTEGER" property="matchBoyBoyCount" />
+    <result column="match_boy_success_count" jdbcType="INTEGER" property="matchBoySuccessCount" />
+    <result column="match_girl_success_count" jdbcType="INTEGER" property="matchGirlSuccessCount" />
+    <result column="match_boy_boy_success_count" jdbcType="INTEGER" property="matchBoyBoySuccessCount" />
+    <result column="match_boy_girl_success_count" jdbcType="INTEGER" property="matchBoyGirlSuccessCount" />
+    <result column="match_girl_girl_success_count" jdbcType="INTEGER" property="matchGirlGirlSuccessCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="selectJoinMatchStat" resultMap="BaseResultMap">
+    SELECT * FROM
+    (SELECT  COUNT(*) as match_total FROM rc_match_stat WHERE date(create_time) = curdate()) as a,
+    (select COUNT(*) as match_success FROM rc_match_stat WHERE result = 1 AND date(create_time) = curdate()) as b ,
+    (SELECT  COUNT(*) as match_fail FROM  rc_match_stat WHERE result = 2 AND date(create_time) = curdate()) as c,
+    (SELECT  COUNT(*) as match_boy_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE n.gender = 1 AND date(m.create_time) = curdate()) as d,
+    (SELECT  COUNT(*) as match_girl_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE n.gender = 2 AND date(m.create_time) = curdate()) as e,
+    (SELECT  COUNT(*) as match_girl_girl_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id INNER JOIN rc_user o on
+m.match_user_id = o.id  WHERE n.gender = 2 AND o.gender = 2  AND date(m.create_time) = curdate()) as f,
+    (SELECT  COUNT(*) as match_boy_girl_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id INNER JOIN rc_user o on
+m.match_user_id = o.id  WHERE (n.gender = 1 AND o.gender = 2) OR (n.gender = 2 AND o.gender = 1)  AND date(m.create_time) = curdate()) as h,
+    (SELECT  COUNT(*) as match_boy_boy_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id INNER JOIN rc_user o on
+m.match_user_id = o.id  WHERE n.gender = 1 AND o.gender = 1  AND date(m.create_time) = curdate()) as i,
+    (SELECT  COUNT(*) as match_boy_success_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE n.gender = 1 AND date(m.create_time) = curdate() AND m.result = 1) as j,
+    (SELECT  COUNT(*) as match_girl_success_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE n.gender = 2 AND date(m.create_time) = curdate() AND m.result = 1) as k
+  </select>
+</mapper>

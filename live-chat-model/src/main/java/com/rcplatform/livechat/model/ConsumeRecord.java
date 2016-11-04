@@ -1,7 +1,6 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
+
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -10,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_consume_record")
-
 public class ConsumeRecord implements Serializable {
 
     public ConsumeRecord(Integer userId, Integer consumeId) {
@@ -25,7 +23,6 @@ public class ConsumeRecord implements Serializable {
      * 主键
      */
     @Id
-
     private Integer id;
 
     /**

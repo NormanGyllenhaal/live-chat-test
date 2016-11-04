@@ -34,7 +34,6 @@ public class AddFriendRecord implements Serializable {
      * 用户主键
      */
     @Id
-
     private Integer id;
 
     /**

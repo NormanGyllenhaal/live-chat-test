@@ -1,8 +1,7 @@
 package com.rcplatform.livechat.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
+
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -17,70 +16,60 @@ public class UserStatistics implements Serializable {
      * 主键
      */
     @Id
-
     private Integer id;
 
     /**
      * 总用户数量
      */
     @Column(name = "user_total_num")
-
     private Integer userTotalNum;
 
     /**
      * facebook的用户数量
      */
     @Column(name = "facebook_num")
-
     private Integer facebookNum;
 
     /**
      * 男性总用户数量
      */
     @Column(name = "user_boy_num")
-
     private Integer userBoyNum;
 
     /**
      * 女性总用户数量
      */
     @Column(name = "user_girl_num")
-
     private Integer userGirlNum;
 
     /**
      * 邮箱用户女性数量
      */
     @Column(name = "email_girl_num")
-
     private Integer emailGirlNum;
 
     /**
      * 邮箱用户男性数量
      */
     @Column(name = "email_boy_num")
-
     private Integer emailBoyNum;
 
     /**
      * 累计facebook女性数量
      */
     @Column(name = "facebook_girl_num")
-
     private Integer facebookGirlNum;
 
     /**
      * 累计facebook男性数量
      */
     @Column(name = "facebook_boy_num")
-
     private Integer facebookBoyNum;
 
     /**
      * 新增用户数量
      */
     @Column(name = "new_user_num")
-
     private Integer newUserNum;
 
     /**

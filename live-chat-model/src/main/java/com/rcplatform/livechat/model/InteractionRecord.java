@@ -1,8 +1,9 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,7 +14,6 @@ public class InteractionRecord implements Serializable {
      * 用户主键
      */
     @Id
-
     private Integer id;
 
     /**

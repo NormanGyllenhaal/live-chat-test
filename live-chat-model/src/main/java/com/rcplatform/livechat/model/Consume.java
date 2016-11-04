@@ -1,7 +1,6 @@
 package com.rcplatform.livechat.model;
 
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaMember;
-import com.bj58.spat.gaea.serializer.component.annotation.GaeaSerializable;
+
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -17,7 +16,6 @@ public class Consume implements Serializable {
      * 主键
      */
     @Id
-
     private Integer id;
 
     /**

@@ -18,7 +18,6 @@ public class AppVersion implements Serializable {
     }
 
     @Id
-
     private Integer id;
 
     /**

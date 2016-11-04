@@ -28,7 +28,6 @@ public class Blacklist implements Serializable {
      * id主键
      */
     @Id
-
     private Integer id;
 
     /**

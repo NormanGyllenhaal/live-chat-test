@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcplatform.livechat.mapper.UserDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.rcplatform.livechat.model.UserDevice">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="device_type" jdbcType="TINYINT" property="deviceType" />
+    <result column="platform_type" jdbcType="TINYINT" property="platformType" />
+    <result column="system_version" jdbcType="VARCHAR" property="systemVersion" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="screen_size" jdbcType="VARCHAR" property="screenSize" />
+    <result column="device_language_id" jdbcType="TINYINT" property="deviceLanguageId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <update id="updateByUserId" parameterType="UserDevice">
+    update rc_user_device
+     <set>
+       <if test="deviceType !=null">
+         device_type = #{deviceType},
+       </if>
+       <if test="platformType!=null">
+         platform_type = #{platformType},
+       </if>
+       <if test="systemVersion!=null">
+         system_version = #{systemVersion},
+       </if>
+       <if test="deviceName!=null">
+         device_name = #{deviceName},
+       </if>
+       <if test="screenSize!=null">
+         screen_size = #{screenSize},
+       </if>
+       <if test="deviceLanguageId!=null">
+         device_language_id = #{deviceLanguageId},
+       </if>
+       <if test="deviceId!=null">
+         device_id = #{deviceId}
+       </if>
+     </set>
+    where user_id = #{userId}
+  </update>
+</mapper>

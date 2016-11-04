@@ -13,7 +13,6 @@ public class UserInteraction implements Serializable {
      * 主键
      */
     @Id
-
     private Integer id;
 
     /**

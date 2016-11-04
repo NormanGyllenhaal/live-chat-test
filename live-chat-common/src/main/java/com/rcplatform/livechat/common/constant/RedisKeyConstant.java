@@ -17,7 +17,7 @@ public class RedisKeyConstant {
     /**
      * 应用名称
      */
-    public static final String APP_NAME = "videochat";
+    public static final String APP_NAME = "livechat";
 
     /**
      * redis key

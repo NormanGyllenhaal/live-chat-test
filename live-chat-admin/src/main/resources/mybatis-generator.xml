@@ -24,28 +24,29 @@
 
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/new_dating_user" userId="root"
+                        connectionURL="jdbc:mysql://localhost:3306/rc_video_chat" userId="root"
                         password="rc2016MYSQL@#$%^">
         </jdbcConnection>
 
         <javaTypeResolver
-                type="com.rcplatform.newdating.core.common.mybatis.JavaTypeResolverImpl">
+                type="com.rcplatform.livechat.common.mybatis.plugin.JavaTypeResolverImpl">
             <property name="forceBigDecimals" value="true"/>
         </javaTypeResolver>
 
 
-        <javaModelGenerator targetPackage="com.rcplatform.newdating.core.model.user"
-                            targetProject="F:\ideaproject\new-dating\new-dating-core\new-dating-core-model\src\main\java"/>
+        <javaModelGenerator targetPackage="com.rcplatform.livechat.model"
+                            targetProject="F:\ideaproject\live-chat\live-chat-model\src\main\java"/>
+
 
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject="F:\ideaproject\new-dating\new-dating-module\new-dating-module-user\src\main\resources"/>
+                         targetProject="F:\ideaproject\live-chat\live-chat-admin\src\main\resources"/>
 
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.rcplatform.newdating.module.user.mapper"
-                             targetProject="F:\ideaproject\new-dating\new-dating-module\new-dating-module-user\src\main\java"/>
+                             targetPackage="com.rcplatform.livechat.mapper"
+                             targetProject="F:\ideaproject\live-chat\live-chat-admin\src\main\java"/>
 
 
-        <table tableName=""/>
+        <table tableName="rc_push" domainObjectName="Push"/>
 
 
     </context>

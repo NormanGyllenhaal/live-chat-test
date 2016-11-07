@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_push_info")
-
 public class PushInfo implements Serializable {
 
     public PushInfo() {
@@ -42,34 +41,29 @@ public class PushInfo implements Serializable {
      * 用户id
      */
     @Column(name = "user_id")
-
     private Integer userId;
 
     /**
      * 用户的性别 用户性别 1 男性 2 女性
      */
-
     private Integer gender;
 
     /**
      * 用户设备平台类型 1 ios 2 android
      */
     @Column(name = "platform_type")
-
     private Integer platformType;
 
     /**
      * 用户推送token
      */
     @Column(name = "push_token")
-
     private String pushToken;
 
     /**
      * 创建时间
      */
     @Column(name = "create_time")
-
     private Date createTime;
 
     private static final long serialVersionUID = 1L;

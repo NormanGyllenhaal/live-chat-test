@@ -39,8 +39,7 @@ public class AdminController {
     @RequestMapping(value="getAdmin",method = RequestMethod.GET)
     @ResponseBody
     public Admin getAdmin(Integer adminId) throws Exception {
-        throw new Exception();
-       //return adminService.getAdmin(adminId);
+       return adminService.getAdmin(adminId);
     }
 
 

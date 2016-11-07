@@ -10,7 +10,6 @@ import com.rcplatform.livechat.model.Push;
 public class PushDto extends Push {
 
 
-
     private Integer adminId;
 
     public Integer getAdminId() {

@@ -6,7 +6,7 @@ logging:
         org.springframework.web: DEBUG
 spring:
     application:
-        name: new-dating-module-user    # 项目名称尽量用小写
+        name: live-chat-admin   # 项目名称尽量用小写
     datasource:
 #        url: jdbc:sqlserver://192.168.16.200:1433;DatabaseName=test
 #        username: sa

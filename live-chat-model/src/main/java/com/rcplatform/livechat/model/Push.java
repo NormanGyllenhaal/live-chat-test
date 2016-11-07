@@ -1,18 +1,14 @@
 package com.rcplatform.livechat.model;
 
-
-import com.alibaba.fastjson.annotation.JSONField;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "rc_push")
-
 public class Push implements Serializable {
-
 
     public Push() {
     }
@@ -38,72 +34,70 @@ public class Push implements Serializable {
      * 应用id
      */
     @Column(name = "app_id")
-
     private Integer appId;
 
     /**
      * 推送的标题
      */
-
     private String title;
 
     /**
      * 推送的url
      */
-
     private String url;
 
     /**
      * 客户端响应方式 0 唤醒
      */
-
     private Integer mode;
 
     /**
      * 推送的内容信息
      */
-
     private String content;
+
+    /**
+     * 赠送金币数量
+     */
+    private BigDecimal gold;
 
     /**
      * 推送的时间
      */
     @Column(name = "push_time")
-
-    @JSONField(format = "yyyy-MM-dd HH:mm")
     private Date pushTime;
 
     /**
      * 是否已推送 1. 推送 2,没有推送
      */
     @Column(name = "is_push")
-
     private Integer isPush;
 
     /**
      * 推送的类型 1 全部 2 男 3女 4 条件筛选
      */
-
     private Integer type;
 
     /**
      * 推送失败次数
      */
-
     private Integer fail;
+
+    /**
+     * 推送的种类 1 赠送金币 2 消息
+     */
+    @Column(name = "push_way")
+    private Integer pushWay;
 
     /**
      * 推送成功次数
      */
-
     private Integer success;
 
     /**
      * 创建的时间
      */
     @Column(name = "create_time")
-
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -217,6 +211,24 @@ public class Push implements Serializable {
     }
 
     /**
+     * 获取赠送金币数量
+     *
+     * @return gold - 赠送金币数量
+     */
+    public BigDecimal getGold() {
+        return gold;
+    }
+
+    /**
+     * 设置赠送金币数量
+     *
+     * @param gold 赠送金币数量
+     */
+    public void setGold(BigDecimal gold) {
+        this.gold = gold;
+    }
+
+    /**
      * 获取推送的时间
      *
      * @return push_time - 推送的时间
@@ -289,6 +301,24 @@ public class Push implements Serializable {
     }
 
     /**
+     * 获取推送的种类 1 赠送金币 2 消息
+     *
+     * @return push_way - 推送的种类 1 赠送金币 2 消息
+     */
+    public Integer getPushWay() {
+        return pushWay;
+    }
+
+    /**
+     * 设置推送的种类 1 赠送金币 2 消息
+     *
+     * @param pushWay 推送的种类 1 赠送金币 2 消息
+     */
+    public void setPushWay(Integer pushWay) {
+        this.pushWay = pushWay;
+    }
+
+    /**
      * 获取推送成功次数
      *
      * @return success - 推送成功次数
@@ -336,10 +366,12 @@ public class Push implements Serializable {
         sb.append(", url=").append(url);
         sb.append(", mode=").append(mode);
         sb.append(", content=").append(content);
+        sb.append(", gold=").append(gold);
         sb.append(", pushTime=").append(pushTime);
         sb.append(", isPush=").append(isPush);
         sb.append(", type=").append(type);
         sb.append(", fail=").append(fail);
+        sb.append(", pushWay=").append(pushWay);
         sb.append(", success=").append(success);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

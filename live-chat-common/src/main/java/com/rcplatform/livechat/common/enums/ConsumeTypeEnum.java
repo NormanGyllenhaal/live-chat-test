@@ -7,7 +7,9 @@ public enum  ConsumeTypeEnum implements IEnum{
 
     INTERACTION(1,"送花"),
 
-    ADDFRIEND(2,"添加朋友");
+    ADDFRIEND(2,"添加朋友"),
+
+    MATCH_GENDER(3,"性别匹配");
 
 
     // 枚举值

@@ -30,7 +30,9 @@ public enum StatEnum implements IEnum {
     USER_REPORT(10022,"你已被举报"),
     USER_OTHER_DEVICE(10023,"用户已在其他设备上登录"),
     USER_IMG_DELETE(10024,"你的头像审核未通过，已被删除"),
-    AGE_OVERFLOW(10025,"你的年龄小于17岁");
+    AGE_OVERFLOW(10025,"你的年龄小于17岁"),
+    EVALUATE_ALREADY(10026,"你已经评价过了"),
+    NO_MORE_DEVICE(10027,"该设备注册账号已超过限制");
 
 
 

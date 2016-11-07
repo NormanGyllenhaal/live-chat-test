@@ -17,7 +17,10 @@ public enum BaseInfoTypeEnum implements IEnum{
     LANGUAGE(2,"语言"),
 
 
-    CONSUME(3,"消费品");
+    CONSUME(3,"消费品"),
+
+
+    FREE_COMMODITY(4,"免费商品");
 
 
     // 枚举值

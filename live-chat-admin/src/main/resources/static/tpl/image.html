@@ -1,0 +1,101 @@
+<div id="main-container">
+    <div id="breadcrumb">
+        <ul class="breadcrumb">
+            <li><i class="fa fa-home"></i>Home</li>
+            <li class="active">图片审核</li>
+        </ul>
+    </div><!-- /breadcrumb-->
+    <div class="main-header clearfix">
+        <div class="page-title">
+            <h3 class="no-margin">图片审核</h3>
+        </div><!-- /page-title -->
+        <ul class="page-stats">
+            <li>
+                性别
+                <select class="form-control input-sm" id="gender-select" ng-model="param.gender" style="display:inline-block; width:100px;">
+                    <option value="">全部</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </li>
+            <li>
+                图片类型
+                <select class="form-control input-sm" id="type-select" ng-model="param.type" style="display:inline-block; width:100px;">
+                <option value="">全部</option>
+                <option value="1">头像</option>
+                <option value="2">背景</option>
+                 </select>
+            </li>
+            <li>
+                <a class="btn btn-primary" ng-click="next()">Next <i class="fa fa-chevron-right"></i></a>
+            </li>
+        </ul><!-- /page-stats -->
+    </div><!-- /main-header -->
+
+    <div class="gallery-container" ng-repeat="img in imgList">
+        <div class="gallery-item">
+            <a class="image-wrapper gallery-zoom" href="javascript:;">
+                <img ng-src="{{img.headImg}}" alt=""/>
+                <img ng-src="{{img.headImg}}" alt=""/>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <div class="h3">{{img.userName}}</div>
+                        <span>{{img.gender==1?"男":"女"}}  {{img.birthday}} {{img.type==1?"头像":"背景图片"}}</span>
+                        <div class="image-time">{{img.createTime}}</div>
+                        <div class="image-like">
+                            <span>删除</span>
+                            <label class="label-checkbox inline">
+                                <input id={{img.id}} type="checkbox" ng-model="x" ng-checked="master"
+                                       ng-click="chk(img.id,x)">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </a><!-- /image-wrapper -->
+        </div><!-- /gallery-item -->
+    </div><!-- /gallery-container -->
+    <div style="width: 100%;float:left">
+         <ul class="pagination">
+             <li ng-class="{disabled: pagination.isFirst(pagination.currentPage)}"
+                 ng-click="pagination.setCurrent(pagination.startPage)">
+                 <a href>首页</a>
+             </li>
+             <li ng-class="{disabled: !pagination.inRange(pagination.currentPage - 1)}"
+                 ng-click="pagination.setCurrent(pagination.currentPage - 1)">
+                 <a href>上一页</a>
+             </li>
+             <li ng-show="pagination.inRange(pagination.pages[0] - 1)"
+                 ng-click="pagination.setCurrent(pagination.currentPage - pagination.maxNumbers)">
+                 <a href>&hellip;</a>
+             </li>
+             <li ng-repeat="page in pagination.pages track by $index" ng-class="{active: pagination.isCurrent(page)}"
+                 ng-click="pagination.setCurrent(page)">
+                 <a href ng-bind="page"></a>
+             </li>
+             <li ng-show="pagination.inRange(pagination.pages[pagination.pages.length - 1] + 1)"
+                 ng-click="pagination.setCurrent(pagination.currentPage + pagination.maxNumbers)">
+                 <a href>&hellip;</a>
+             </li>
+             <li ng-class="{disabled: !pagination.inRange(pagination.currentPage + 1)}"
+                 ng-click="pagination.setCurrent(pagination.currentPage + 1)">
+                 <a href>下一页</a>
+             </li>
+             <li ng-class="{disabled: pagination.isLast(pagination.currentPage)}"
+                 ng-click="pagination.setCurrent(pagination.endPage)">
+                 <a href>尾页</a>
+             </li>
+         </ul>
+     </div>
+</div>
+<!--
+<script>
+    $(function()	{
+        //Colorbox
+        $('.gallery-zoom').colorbox({
+            rel:'gallery',
+            maxWidth:'90%',
+            width:'800px'
+        });
+    });
+</script>-->

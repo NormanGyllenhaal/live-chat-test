@@ -48,7 +48,7 @@ public class UserHeadImgServiceImpl extends AbstractService implements IUserHead
     @Override
     public Page getImg(ImgAdminReqDto imgAdminReqDto) {
         PageHelper.startPage(imgAdminReqDto.getPageNo(),imgAdminReqDto.getPageSize(),"create_time desc");
-        List imgList = userHeadImgMapper.select(new UserHeadImg(imgAdminReqDto.getGender(),imgAdminReqDto.getType(), UserHeadImgHandleEnum.UNHANDLE.key()));
+        List<UserHeadImg> imgList = userHeadImgMapper.select(new UserHeadImg(imgAdminReqDto.getGender(),imgAdminReqDto.getType(), UserHeadImgHandleEnum.UNHANDLE.key()));
         return getPage(imgList);
     }
 

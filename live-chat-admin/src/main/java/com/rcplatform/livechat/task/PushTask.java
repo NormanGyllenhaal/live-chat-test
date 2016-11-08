@@ -1,62 +1,38 @@
-package com.rcplatform.livechat.service.impl;
-
+package com.rcplatform.livechat.task;
 
 import com.google.android.gcm.server.MulticastResult;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.rcplatform.livechat.common.enums.IsPushEnum;
 import com.rcplatform.livechat.common.enums.PlatformTypeEnum;
+import com.rcplatform.livechat.common.enums.PushTypeEnum;
 import com.rcplatform.livechat.common.enums.UserGenderEnum;
 import com.rcplatform.livechat.common.push.GoogleGcmPush;
 import com.rcplatform.livechat.common.push.IosPush;
-import com.rcplatform.livechat.common.util.DateUtil;
-import com.rcplatform.livechat.mapper.*;
-import com.rcplatform.livechat.model.*;
-import com.rcplatform.livechat.service.ITimedTaskService;
+import com.rcplatform.livechat.mapper.PushCountryMapper;
+import com.rcplatform.livechat.mapper.PushInfoMapper;
+import com.rcplatform.livechat.mapper.PushMapper;
+import com.rcplatform.livechat.mapper.PushUserMapper;
+import com.rcplatform.livechat.model.Push;
+import com.rcplatform.livechat.model.PushInfo;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
-import static com.rcplatform.livechat.common.enums.PushTypeEnum.valueOf;
-
 /**
- * Created by yang peng on 2016/8/26.
+ * Created by yang peng on 2016/11/8.
  */
-@Component
-public class TimedTaskServiceImpl implements ITimedTaskService {
+@Service
+public class PushTask {
 
 
-    private Logger logger = LoggerFactory.getLogger(TimedTaskServiceImpl.class);
-
-
-    @Resource
-    private UserStatisticsMapper userStatisticsMapper;
-    
-    
-    @Resource
-    private StatisticsDayMapper statisticsDayMapper;
-
-    @Resource
-    private PayStatDayMapper payStatDayMapper;
-
-
-    @Resource
-    private MatchNumDayMapper matchNumDayMapper;
-
-
-    @Resource
-    private UserKeepMapper userKeepMapper;
-
-
-    @Resource
-    private ActiveUserHourMapper activeUserHourMapper;
+    private Logger logger = LoggerFactory.getLogger(PushTask.class);
 
 
     @Resource
@@ -73,64 +49,8 @@ public class TimedTaskServiceImpl implements ITimedTaskService {
     private IosPush iosPush;
 
 
-
-    @Scheduled(cron="0 59 23 * * ?")
-    @Override
-    public void userStatisticsTask() {
-        UserStatistics userStatistics = userStatisticsMapper.selectFromUser();
-        userStatisticsMapper.insertSelective(userStatistics);
-        UserKeep userKeep = userKeepMapper.selectUserRecord();
-        userKeepMapper.insertSelective(userKeep);
-    }
-
-
-
-    @Scheduled(cron="0 59 23 * * ?")
-    @Override
-    public void statisticsDayTask(){
-        StatisticsDay statisticsDay = statisticsDayMapper.selectFromVideoRecord();
-        Integer videoBefriendCount = statisticsDayMapper.selectFromAddFriendRecord();
-        StatisticsDay consumeRecode = statisticsDayMapper.selectFromConsumeRecord();
-        StatisticsDay bothFriendStatistics = statisticsDayMapper.selectUserFriend();
-        statisticsDay.setVideoBefriendCount(videoBefriendCount);
-        statisticsDay.setMatchPagePayPeople(consumeRecode.getMatchPagePayPeople());
-        statisticsDay.setMatchPagePayCount(consumeRecode.getMatchPagePayCount());
-        statisticsDay.setGirlPayCount(consumeRecode.getGirlPayCount());
-        statisticsDay.setGirlPayPeople(consumeRecode.getGirlPayPeople());
-        statisticsDay.setBoyPayCount(consumeRecode.getBoyPayCount());
-        statisticsDay.setBoyPayPeople(consumeRecode.getBoyPayPeople());
-        statisticsDay.setFriendVideoCount(statisticsDay.getFriendVideoPeople()/2);
-        statisticsDay.setBothFriendTotal(bothFriendStatistics.getBothFriendTotal());
-        statisticsDay.setBothFriendDay(bothFriendStatistics.getBothFriendDay());
-        statisticsDayMapper.insertSelective(statisticsDay);
-    }
-
-
-
-    @Scheduled(cron="0 59 23 * * ?")
-    @Override
-    public void payStatDayTask(){
-        PayStatDay payStatDay = payStatDayMapper.selectPayRecord();
-        payStatDayMapper.insertSelective(payStatDay);
-    }
-
-
-
-    @Scheduled(cron="0 59 23 * * ?")
-    @Override
-    public void matchNumDayTask(){
-        MatchNumDay matchNumDay = matchNumDayMapper.selectJoinMatchStat();
-        matchNumDayMapper.insertSelective(matchNumDay);
-    }
-
-
-
-    @Scheduled(cron = "0 0 0/1 * * ?")
-    public void userActiveHourTask(){
-        ActiveUserHour activeUserHour = activeUserHourMapper.selectUserApiRecord(DateUtil.getDatePlusHour(new Date(), -1), new Date());
-        activeUserHourMapper.insertSelective(activeUserHour);
-    }
-
+    @Autowired
+    private PushCountryMapper pushCountryMapper;
 
 
     /**
@@ -148,7 +68,7 @@ public class TimedTaskServiceImpl implements ITimedTaskService {
                 if (push.getPushTime().getTime() <= System.currentTimeMillis()) {
                     List<String> androidPushToken = null;
                     List<String> iosPushToken = null;
-                    switch (valueOf(push.getType())) {
+                    switch (PushTypeEnum.valueOf(push.getType())) {
                         case ALL:
                             List<PushInfo> androidPushInfoList = pushInfoMapper.selectPushToken(PlatformTypeEnum.ANDROID.key(), null, null);
                             List<PushInfo> iosPushInfoList = pushInfoMapper.selectPushToken(PlatformTypeEnum.IOS.key(), null, null);
@@ -198,6 +118,4 @@ public class TimedTaskServiceImpl implements ITimedTaskService {
             }
         });
     }
-
-
 }

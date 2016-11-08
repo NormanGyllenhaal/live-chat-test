@@ -2,8 +2,10 @@ package com.rcplatform.livechat.controller;
 
 
 import com.rcplatform.livechat.common.response.Page;
+import com.rcplatform.livechat.common.response.Response;
 import com.rcplatform.livechat.dto.request.PushDto;
 import com.rcplatform.livechat.service.IPushService;
+import org.omg.CORBA.Object;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,15 +18,16 @@ import javax.annotation.Resource;
  */
 @RequestMapping("push")
 @RestController
-public class PushController {
+public class PushController extends BaseController{
 
     @Resource
     private IPushService pushService;
 
     @RequestMapping("addPush")
     @ResponseBody
-    public void addPush(@RequestBody PushDto pushDto){
+    public Response<Object> addPush(@RequestBody PushDto pushDto){
         pushService.addPush(pushDto);
+        return success(null);
     }
 
 

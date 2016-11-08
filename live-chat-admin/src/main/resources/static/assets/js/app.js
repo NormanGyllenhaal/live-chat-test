@@ -458,8 +458,16 @@ animateApp.controller('pushController', function ($scope, $http, ngTip) {
         forceParse: 0,
         showMeridian: 1
     });
-    $scope.push = {adminId: adminId};
+    var PushLanguage = function (languageId,context) {
+        this.languageId = languageId;
+        this.context = context;
+    }
     $scope.reset = function () {
+        var pushLanguages = new Array();
+        pushLanguages.push(new PushLanguage(1,$scope.english));
+        pushLanguages.push(new PushLanguage(2,$scope.chinese));
+        pushLanguages.push(new PushLanguage(12,$scope.portugal));
+        $scope.push = {adminId: adminId,pushLanguages:pushLanguages};
         console.log($scope.push);
         $http.post(url, $scope.push).success(function (response) {
             console.log(response);

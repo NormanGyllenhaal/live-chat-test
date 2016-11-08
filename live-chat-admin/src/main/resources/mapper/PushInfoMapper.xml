@@ -12,6 +12,14 @@
         <result column="push_token" property="pushToken" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+    
+    
+    <resultMap id="JoinUserResultMap" type="com.rcplatform.livechat.model.PushInfo">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="language_id" property="languageId" jdbcType="VARCHAR" />
+        <result column="platform_type" property="platformType" jdbcType="TINYINT"/>
+        <result column="push_token" property="pushToken" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <update id="updatePushTokenByUserId" parameterType="com.rcplatform.livechat.model.PushInfo">
         update rc_push_info
@@ -42,4 +50,7 @@
                 </foreach>
             </if>  GROUP BY user_id
     </select>
+
+
+    <select id="selectJoinUser" resultMap="JoinUserResultMap"></select>
 </mapper>

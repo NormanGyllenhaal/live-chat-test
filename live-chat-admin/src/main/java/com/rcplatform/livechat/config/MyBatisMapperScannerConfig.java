@@ -48,7 +48,7 @@ public class MyBatisMapperScannerConfig {
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage("com.rcplatform.livechat.mapper");
         Properties properties = new Properties();
-        properties.setProperty("mappers", "tk.mybatis.mapper.common.Mapper");
+        properties.setProperty("mappers", "com.rcplatform.livechat.common.mybatis.mapper.CommonMapper");
         properties.setProperty("notEmpty", "false");
         properties.setProperty("IDENTITY", "MYSQL");
         mapperScannerConfigurer.setProperties(properties);

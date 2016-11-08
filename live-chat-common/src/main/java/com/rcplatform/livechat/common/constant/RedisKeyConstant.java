@@ -17,7 +17,7 @@ public class RedisKeyConstant {
     /**
      * 应用名称
      */
-    public static final String APP_NAME = "livechat";
+    public static final String APP_NAME = "videochat";
 
     /**
      * redis key
@@ -120,10 +120,6 @@ public class RedisKeyConstant {
     public  static final String USER_LIVE_TIME ="userlivetime";
 
 
-    /**
-     * 用户的性别条件hash
-     */
-    public static final String USER_GENDER_CONDITION="usergendercondition";
 
     /**
      * 用户id设备key hash
@@ -136,5 +132,76 @@ public class RedisKeyConstant {
      */
     public static final String MATCH_STAT = "matchstat";
 
+
+    /**
+     * 用户主页查看次数 zset
+     */
+    public static final String USER_PROFILE = "userprofile";
+
+
+    /**
+     * 用户主页男性查看次数
+     */
+    public static final String USER_PROFILE_BOY ="userprofileboy";
+
+
+    /**
+     * 用户主页女性查看次数
+     */
+    public static final String USER_PROFILE_GIRL="userprofilegirl";
+
+
+    /**
+     * 用户登录时间 zset
+     */
+    public static final String USER_LOGIN_TIME = "userlogintime";
+
+
+    /**
+     * 用户匹配时上一次屏蔽的人集合
+     */
+    public static final String USER_LAST = "userlast";
+
+
+    /**
+     * 用户的关系key
+     */
+    public static final String USER_RELATION = "userrelation";
+
+
+    /**
+     * 用户性别选择条件key
+     */
+    public static final String USER_GENDER_CHOICE = "usergenderchoice";
+
+
+    /**
+     * 用户付费key
+     */
+    public static final String USER_PAY = "userpay";
+
+
+    /**
+     * 用户的视频时间
+     */
+    public static final String VIDEO_TIME = "videotime";
+
+
+    /**
+     * 用户匹配次数计数
+     */
+    public  static final String USER_MATCH_COUNT = "usermatchcount";
+
+
+    /**
+     * 用户next两次的人
+     */
+    public  static final String USER_NEXT ="usernext";
+
+
+    /**
+     * 用户跳过的人
+     */
+    public  static final String USER_SKIP = "userskip";
 
 }

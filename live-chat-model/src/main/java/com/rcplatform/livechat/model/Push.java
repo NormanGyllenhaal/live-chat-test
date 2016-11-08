@@ -1,8 +1,10 @@
 package com.rcplatform.livechat.model;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,17 +30,20 @@ public class Push implements Serializable {
      * 主键
      */
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Integer id;
 
     /**
      * 应用id
      */
     @Column(name = "app_id")
+    @NotNull
     private Integer appId;
 
     /**
      * 推送的标题
      */
+    @NotNull
     private String title;
 
     /**
@@ -76,6 +81,7 @@ public class Push implements Serializable {
     /**
      * 推送的类型 1 全部 2 男 3女 4 条件筛选
      */
+    @NotNull
     private Integer type;
 
     /**
@@ -86,6 +92,7 @@ public class Push implements Serializable {
     /**
      * 推送的种类 1 赠送金币 2 消息
      */
+    @NotNull
     @Column(name = "push_way")
     private Integer pushWay;
 

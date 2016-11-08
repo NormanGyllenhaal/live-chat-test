@@ -2,6 +2,7 @@ package com.rcplatform.livechat.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.rcplatform.livechat.common.enums.HeadImgTypeEnum;
+import com.rcplatform.livechat.common.enums.UserGenderEnum;
 import com.rcplatform.livechat.common.enums.UserHeadImgCheckedEnum;
 import com.rcplatform.livechat.common.enums.UserHeadImgHandleEnum;
 import com.rcplatform.livechat.common.response.Page;
@@ -67,8 +68,12 @@ public class UserHeadImgServiceImpl extends AbstractService implements IUserHead
                     @Override
                     public Object execute(RedisOperations redisOperations) throws DataAccessException {
                         redisOperations.opsForZSet().remove(key,userHeadImg.getUserId().toString());
-                        redisOperations.opsForZSet().remove(girlKey,userHeadImg.getUserId().toString());
-                        redisOperations.opsForZSet().remove(boyKey,userHeadImg.getUserId().toString());
+                        if(userHeadImg.getGender().equals(UserGenderEnum.BOY.key())){
+                            redisOperations.opsForZSet().remove(boyKey,userHeadImg.getUserId().toString());
+                        }
+                        if(userHeadImg.getGender().equals(UserGenderEnum.GIRL.key())){
+                            redisOperations.opsForZSet().remove(girlKey,userHeadImg.getUserId().toString());
+                        }
                         return null;
                     }
                 });

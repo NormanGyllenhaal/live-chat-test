@@ -68,12 +68,8 @@ public class UserHeadImgServiceImpl extends AbstractService implements IUserHead
                     @Override
                     public Object execute(RedisOperations redisOperations) throws DataAccessException {
                         redisOperations.opsForZSet().remove(key,userHeadImg.getUserId().toString());
-                        if(userHeadImg.getGender().equals(UserGenderEnum.BOY.key())){
-                            redisOperations.opsForZSet().remove(boyKey,userHeadImg.getUserId().toString());
-                        }
-                        if(userHeadImg.getGender().equals(UserGenderEnum.GIRL.key())){
-                            redisOperations.opsForZSet().remove(girlKey,userHeadImg.getUserId().toString());
-                        }
+                        redisOperations.opsForZSet().remove(boyKey,userHeadImg.getUserId().toString());
+                        redisOperations.opsForZSet().remove(girlKey,userHeadImg.getUserId().toString());
                         return null;
                     }
                 });
@@ -83,12 +79,16 @@ public class UserHeadImgServiceImpl extends AbstractService implements IUserHead
                     userMapper.updateByPrimaryKeySelective(new User(userHeadImg.getUserId(),"",null,new Date()));
                 }
             }else{
-                redisTemplate.executePipelined(new SessionCallback() {
+                redisTemplate.execute(new SessionCallback() {
                     @Override
                     public Object execute(RedisOperations redisOperations) throws DataAccessException {
                         redisOperations.opsForZSet().incrementScore(key,userHeadImg.getUserId().toString(),0);
-                        redisOperations.opsForZSet().incrementScore(girlKey,userHeadImg.getUserId().toString(),0);
-                        redisOperations.opsForZSet().incrementScore(boyKey,userHeadImg.getUserId().toString(),0);
+                        if(userHeadImg.getGender().equals(UserGenderEnum.GIRL.key())){
+                            redisOperations.opsForZSet().incrementScore(girlKey,userHeadImg.getUserId().toString(),0);
+                        }
+                        if(userHeadImg.getGender().equals(UserGenderEnum.BOY.key())){
+                            redisOperations.opsForZSet().incrementScore(boyKey,userHeadImg.getUserId().toString(),0);
+                        }
                         return null;
                     }
                 });

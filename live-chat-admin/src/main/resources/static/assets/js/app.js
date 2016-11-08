@@ -1,8 +1,8 @@
 /**
  * Created by admin on 2016/9/18.
  */
-//var server = "http://livechat.rcplatformhk.com/admin/";
-var server = "http://localhost:8100";
+var server = "http://livechat.rcplatformhk.com:8100";
+//var server = "http://localhost:8100";
 var format = function (date) {
     var fmt = "yyyy-MM-dd";
     var o = {

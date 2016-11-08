@@ -29,13 +29,13 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <select id="selectByThreePartyId" resultType="user">
+  <select id="selectByThreePartyId" resultType="com.rcplatform.livechat.model.User">
     select * from rc_user where three_party_id = #{threePartyId} and app_id = #{appId}
   </select>
   <update id="updatePassword">
     update rc_user set password = #{password} where user_account = #{userAccount} and app_id = #{appId}
   </update>
-  <select id="selectCountByIdAndPassword" resultType="integer">
+  <select id="selectCountByIdAndPassword" resultType="java.lang.Integer">
     select count(*) from rc_user where id = #{userId} and password = #{password}
   </select>
   <update id="updatePasswordById">

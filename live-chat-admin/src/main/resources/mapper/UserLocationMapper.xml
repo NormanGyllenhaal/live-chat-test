@@ -24,7 +24,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <select id="updateByUserId" parameterType="UserLocation">
+    <select id="updateByUserId" parameterType="com.rcplatform.livechat.model.UserLocation">
     update rc_user_location set longitude = #{longitude},latitude = #{latitude},ip=#{ip},continent = #{continent},continent_code = #{continentCode},country = #{country},time_zone = #{timeZone},subdivision_code = #{subdivisionCode},subdivision = #{subdivision},city_code = #{cityCode},location_open = #{locationOpen},city = #{city},update_time = #{updateTime} where user_id = #{userId}
   </select>
 </mapper>

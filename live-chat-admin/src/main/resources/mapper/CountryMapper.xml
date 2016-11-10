@@ -10,5 +10,6 @@
     <result column="country_name_en" jdbcType="VARCHAR" property="countryNameEn" />
     <result column="country_name_cn" jdbcType="VARCHAR" property="countryNameCn" />
     <result column="ab" jdbcType="VARCHAR" property="ab" />
+    <result column="time_difference" jdbcType="TINYINT" property="timeDifference" />
   </resultMap>
 </mapper>

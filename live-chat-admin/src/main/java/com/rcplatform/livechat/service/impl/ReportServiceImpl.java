@@ -74,9 +74,9 @@ public class ReportServiceImpl extends AbstractService implements IReportService
                 redisTemplate.executePipelined(new SessionCallback() {
                     @Override
                     public Object execute(RedisOperations redisOperations) throws DataAccessException {
-                        redisOperations.opsForZSet().incrementScore(key,report.getReportedUserId().toString(),0);
-                        redisOperations.opsForZSet().incrementScore(girlKey,report.getReportedUserId().toString(),0);
-                        redisOperations.opsForZSet().incrementScore(boyKey,report.getReportedUserId().toString(),0);
+                        redisOperations.opsForZSet().remove(key,report.getReportedUserId().toString());
+                        redisOperations.opsForZSet().remove(girlKey,report.getReportedUserId().toString());
+                        redisOperations.opsForZSet().remove(boyKey,report.getReportedUserId().toString());
                         return null;
                     }
                 });

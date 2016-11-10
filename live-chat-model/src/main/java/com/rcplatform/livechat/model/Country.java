@@ -1,31 +1,38 @@
 package com.rcplatform.livechat.model;
 
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
+import javax.persistence.*;
 
 @Table(name = "rc_country")
-
 public class Country implements Serializable {
     @Id
     private Integer id;
 
+    /**
+     * 国家代码
+     */
     @Column(name = "country_code")
-
     private Integer countryCode;
 
+    /**
+     * 国家名称英文
+     */
     @Column(name = "country_name_en")
-
     private String countryNameEn;
 
+    /**
+     * 国家名称中文
+     */
     @Column(name = "country_name_cn")
-
     private String countryNameCn;
 
-
+    /**
+     * iso缩写
+     */
     private String ab;
+
+    @Column(name = "time_difference")
+    private Integer timeDifference;
 
     private static final long serialVersionUID = 1L;
 
@@ -44,59 +51,89 @@ public class Country implements Serializable {
     }
 
     /**
-     * @return country_code
+     * 获取国家代码
+     *
+     * @return country_code - 国家代码
      */
     public Integer getCountryCode() {
         return countryCode;
     }
 
     /**
-     * @param countryCode
+     * 设置国家代码
+     *
+     * @param countryCode 国家代码
      */
     public void setCountryCode(Integer countryCode) {
         this.countryCode = countryCode;
     }
 
     /**
-     * @return country_name_en
+     * 获取国家名称英文
+     *
+     * @return country_name_en - 国家名称英文
      */
     public String getCountryNameEn() {
         return countryNameEn;
     }
 
     /**
-     * @param countryNameEn
+     * 设置国家名称英文
+     *
+     * @param countryNameEn 国家名称英文
      */
     public void setCountryNameEn(String countryNameEn) {
         this.countryNameEn = countryNameEn;
     }
 
     /**
-     * @return country_name_cn
+     * 获取国家名称中文
+     *
+     * @return country_name_cn - 国家名称中文
      */
     public String getCountryNameCn() {
         return countryNameCn;
     }
 
     /**
-     * @param countryNameCn
+     * 设置国家名称中文
+     *
+     * @param countryNameCn 国家名称中文
      */
     public void setCountryNameCn(String countryNameCn) {
         this.countryNameCn = countryNameCn;
     }
 
     /**
-     * @return ab
+     * 获取iso缩写
+     *
+     * @return ab - iso缩写
      */
     public String getAb() {
         return ab;
     }
 
     /**
-     * @param ab
+     * 设置iso缩写
+     *
+     * @param ab iso缩写
      */
     public void setAb(String ab) {
         this.ab = ab;
+    }
+
+    /**
+     * @return time_difference
+     */
+    public Integer getTimeDifference() {
+        return timeDifference;
+    }
+
+    /**
+     * @param timeDifference
+     */
+    public void setTimeDifference(Integer timeDifference) {
+        this.timeDifference = timeDifference;
     }
 
     @Override
@@ -110,6 +147,7 @@ public class Country implements Serializable {
         sb.append(", countryNameEn=").append(countryNameEn);
         sb.append(", countryNameCn=").append(countryNameCn);
         sb.append(", ab=").append(ab);
+        sb.append(", timeDifference=").append(timeDifference);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

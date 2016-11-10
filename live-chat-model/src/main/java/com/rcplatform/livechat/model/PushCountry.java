@@ -1,12 +1,28 @@
 package com.rcplatform.livechat.model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "rc_push_country")
 public class PushCountry implements Serializable {
+
+
+    public PushCountry(Integer pushId, String countryId, Integer isPush, Date pushTime, Date createTime) {
+        this.pushId = pushId;
+        this.countryId = countryId;
+        this.isPush = isPush;
+        this.pushTime = pushTime;
+        this.createTime = createTime;
+    }
+
+    public PushCountry() {
+    }
+
     /**
+
      * 主键
      */
     @Id
@@ -15,19 +31,20 @@ public class PushCountry implements Serializable {
     /**
      * pushid
      */
-    private Integer pushid;
+    @Column(name = "push_id")
+    private Integer pushId;
 
     /**
      * 国家id
      */
     @Column(name = "country_id")
-    private Integer countryId;
+    private String countryId;
 
     /**
      * 是否推送
      */
-    @Column(name = "push_id")
-    private Integer pushId;
+    @Column(name = "is_push")
+    private Integer isPush;
 
     /**
      * 推送时间
@@ -64,19 +81,19 @@ public class PushCountry implements Serializable {
     /**
      * 获取pushid
      *
-     * @return pushid - pushid
+     * @return push_id - pushid
      */
-    public Integer getPushid() {
-        return pushid;
+    public Integer getPushId() {
+        return pushId;
     }
 
     /**
      * 设置pushid
      *
-     * @param pushid pushid
+     * @param pushId pushid
      */
-    public void setPushid(Integer pushid) {
-        this.pushid = pushid;
+    public void setPushId(Integer pushId) {
+        this.pushId = pushId;
     }
 
     /**
@@ -84,7 +101,7 @@ public class PushCountry implements Serializable {
      *
      * @return country_id - 国家id
      */
-    public Integer getCountryId() {
+    public String getCountryId() {
         return countryId;
     }
 
@@ -93,26 +110,26 @@ public class PushCountry implements Serializable {
      *
      * @param countryId 国家id
      */
-    public void setCountryId(Integer countryId) {
+    public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
 
     /**
      * 获取是否推送
      *
-     * @return push_id - 是否推送
+     * @return is_push - 是否推送
      */
-    public Integer getPushId() {
-        return pushId;
+    public Integer getIsPush() {
+        return isPush;
     }
 
     /**
      * 设置是否推送
      *
-     * @param pushId 是否推送
+     * @param isPush 是否推送
      */
-    public void setPushId(Integer pushId) {
-        this.pushId = pushId;
+    public void setIsPush(Integer isPush) {
+        this.isPush = isPush;
     }
 
     /**
@@ -158,9 +175,9 @@ public class PushCountry implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", pushid=").append(pushid);
-        sb.append(", countryId=").append(countryId);
         sb.append(", pushId=").append(pushId);
+        sb.append(", countryId=").append(countryId);
+        sb.append(", isPush=").append(isPush);
         sb.append(", pushTime=").append(pushTime);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

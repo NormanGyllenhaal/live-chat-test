@@ -20,6 +20,15 @@ public class ReportAdminReqDto {
 
     public static class ReportStaticAdmin{
 
+        public ReportStaticAdmin() {
+        }
+
+        public ReportStaticAdmin(Integer reportId, Integer result, String description, Integer handleWay) {
+            this.reportId = reportId;
+            this.result = result;
+            this.description = description;
+            this.handleWay = handleWay;
+        }
 
         private Integer reportId;
 

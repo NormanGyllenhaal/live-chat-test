@@ -2,6 +2,7 @@ package com.rcplatform.livechat.mapper;
 
 
 import com.rcplatform.livechat.common.mybatis.mapper.CommonMapper;
+import com.rcplatform.livechat.dto.response.PushUserDto;
 import com.rcplatform.livechat.model.PushInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,5 +26,16 @@ public interface PushInfoMapper extends CommonMapper<PushInfo> {
      * @return
      */
     List<PushInfo> selectPushToken(@Param("platformType") Integer platformType, @Param("gender") Integer gender, @Param("userIdList") List<Integer> userIdList);
+
+
+    /**
+     * 根据国家id查询用户token
+     * @param platformType
+     * @param list
+     * @return
+     */
+    List<PushUserDto> selectJoinUser(@Param("platformType")Integer platformType,@Param("list")List<Integer> list);
+
+
 
 }

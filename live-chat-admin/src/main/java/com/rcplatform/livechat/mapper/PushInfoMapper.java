@@ -34,7 +34,7 @@ public interface PushInfoMapper extends CommonMapper<PushInfo> {
      * @param list
      * @return
      */
-    List<PushUserDto> selectJoinUser(@Param("platformType")Integer platformType,@Param("list")List<Integer> list);
+    List<PushUserDto> selectJoinUser(@Param("platformType")Integer platformType,@Param("list")List<Integer> list,@Param("gender") Integer gender, @Param("userIdList") List<Integer> userIdList);
 
 
 

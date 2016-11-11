@@ -6,9 +6,9 @@ package com.rcplatform.livechat.common.enums;
 public enum PushWayEnum implements IEnum {
 
 
-    GOLD(1,"ios"),
+    GOLD(1,"金币"),
 
-    MESSAGE(2,"android");
+    MESSAGE(2,"消息");
 
 
     // 枚举值

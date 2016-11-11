@@ -14,7 +14,7 @@
     </resultMap>
 
 
-    <resultMap id="JoinUserResultMap" type="com.rcplatform.livechat.model.PushInfo">
+    <resultMap id="JoinUserResultMap" type="com.rcplatform.livechat.dto.response.PushUserDto">
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="language_id" property="languageId" jdbcType="VARCHAR"/>
         <result column="platform_type" property="platformType" jdbcType="TINYINT"/>
@@ -55,6 +55,16 @@
 
     <select id="selectJoinUser" resultMap="JoinUserResultMap">
         select b.user_id,b.push_token,a.language_id FROM rc_user a inner join rc_push_info b on a.id = b.user_id where b.platform_type = #{platformType}
+        <if test="gender !=null">
+            AND gender = #{gender}
+        </if>
+        <if test="userIdList!=null">
+            AND b.user_id IN
+            <foreach collection="userIdList" item="userId" index="index" open="(" close=")" separator=",">
+                #{userId}
+            </foreach>
+        </if>
+        and
         a.country_id in
         <foreach collection="list" item="countryId" index="index" open="(" close=")" separator=",">
             #{countryId}

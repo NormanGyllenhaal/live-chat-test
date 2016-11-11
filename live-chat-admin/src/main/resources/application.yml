@@ -34,6 +34,8 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    profiles:
+        default: production
 
 #以下属性不可用
 #mybatis:

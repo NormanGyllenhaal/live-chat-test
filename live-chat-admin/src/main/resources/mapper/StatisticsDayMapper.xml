@@ -66,7 +66,7 @@
        (SELECT IFNULL(COUNT(*),0) as friend_video_people FROM rc_video_record WHERE is_friend = 2 AND date(create_time) = curdate()) as g,
        (SELECT IFNULL(COUNT(*),0) as three_chat_count FROM rc_video_record WHERE is_friend = 1 AND video_time = 180000 AND date(create_time) = curdate()) as h,
        (SELECT IFNULL(COUNT(*),0) as girl_girl_video_count FROM rc_video_record WHERE gender = 2 AND matched_gender = 2 AND date(create_time) = curdate()) as i,
-       (select sum(boy_girl_video_count) from  (SELECT IFNULL(COUNT(*),0) as boy_girl_video_count FROM rc_video_record  WHERE gender = 1 AND matched_gender = 2  AND date(create_time) = curdate() union all SELECT IFNULL(COUNT(*),0) as boy_girl_video_count FROM rc_video_record WHERE gender = 2 AND matched_gender = 1  AND date(create_time) = curdate()) z ) as j,
+       (select sum(boy_girl_video_count) as boy_girl_video_count from  (SELECT IFNULL(COUNT(*),0) as boy_girl_video_count FROM rc_video_record  WHERE gender = 1 AND matched_gender = 2  AND date(create_time) = curdate() union all SELECT IFNULL(COUNT(*),0) as boy_girl_video_count FROM rc_video_record WHERE gender = 2 AND matched_gender = 1  AND date(create_time) = curdate()) z ) as j,
        (SELECT IFNULL(COUNT(*),0) as boy_boy_video_count FROM rc_video_record WHERE gender = 1 AND matched_gender = 1 AND date(create_time) = curdate()) as k
   </select>
 

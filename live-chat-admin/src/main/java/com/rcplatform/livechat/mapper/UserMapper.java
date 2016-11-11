@@ -5,6 +5,8 @@ import com.rcplatform.livechat.common.mybatis.mapper.CommonMapper;
 import com.rcplatform.livechat.model.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper extends CommonMapper<User> {
 
     /**
@@ -41,4 +43,10 @@ public interface UserMapper extends CommonMapper<User> {
      * @return
      */
     Integer updatePasswordById(@Param("userId") Integer userId, @Param("password") String password);
+
+
+
+
+
+    List<User> selectUserGold(@Param("gender") Integer gender,@Param("userIdList") List<Integer> userIdList);
 }

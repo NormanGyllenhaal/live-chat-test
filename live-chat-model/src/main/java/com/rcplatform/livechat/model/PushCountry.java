@@ -18,6 +18,11 @@ public class PushCountry implements Serializable {
         this.createTime = createTime;
     }
 
+    public PushCountry(Integer id, Integer isPush) {
+        this.id = id;
+        this.isPush = isPush;
+    }
+
     public PushCountry() {
     }
 

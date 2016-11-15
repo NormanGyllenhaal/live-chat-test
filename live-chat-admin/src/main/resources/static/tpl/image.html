@@ -42,6 +42,7 @@
                         <div class="h3">{{img.userName}}</div>
                         <span>{{img.gender==1?"男":"女"}}  {{img.birthday}} {{img.type==1?"头像":"背景图片"}}</span>
                         <div class="image-time">{{img.createTime}}</div>
+                        <button  class="btn btn-xs btn-danger" ng-click="offUserAndDelete(img.id)"><i class="fa fa-check"></i> 删除并禁用账号6小时</button>
                         <div class="image-like">
                             <span>删除</span>
                             <label class="label-checkbox inline">

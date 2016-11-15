@@ -1,0 +1,36 @@
+<div id="main-container">
+    <div id="breadcrumb">
+        <ul class="breadcrumb">
+            <li><i class="fa fa-home"></i>Home</li>
+            <li class="active">当前封号用户</li>
+        </ul>
+    </div><!-- /breadcrumb-->
+    <div class="main-header clearfix">
+        <div class="page-title">
+            <h3 class="no-margin">当前封号用户</h3>
+        </div><!-- /page-title -->
+    </div><!-- /main-header -->
+    <div class="gallery-container" ng-repeat="img in imgList">
+        <div class="gallery-item">
+            <a class="image-wrapper gallery-zoom" href="javascript:;">
+                <img ng-src="{{img.headImg}}" alt=""/>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <div class="h3">{{img.userName}}</div>
+                        <span>{{img.gender==1?"男":"女"}}  {{img.birthday}} {{img.type==1?"头像":"背景图片"}}</span>
+                        <div class="image-time">{{img.createTime}}</div>
+                        <div class="image-like">
+                            <span>删除</span>
+                            <label class="label-checkbox inline">
+                                <input id={{img.id}} type="checkbox" ng-model="x" ng-checked="master"
+                                       ng-click="chk(img.id,x)">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </a><!-- /image-wrapper -->
+        </div><!-- /gallery-item -->
+    </div><!-- /gallery-container -->
+</div>
+

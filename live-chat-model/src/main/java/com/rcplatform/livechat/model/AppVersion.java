@@ -7,16 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_app_version")
-
 public class AppVersion implements Serializable {
-
-    public AppVersion() {
-    }
-
-    public AppVersion(Integer appId) {
-        this.appId = appId;
-    }
-
     @Id
     private Integer id;
 
@@ -24,77 +15,66 @@ public class AppVersion implements Serializable {
      * 应用id
      */
     @Column(name = "app_id")
-
     private Integer appId;
 
     /**
      * 应用的描述信息
      */
-
     private String description;
 
     /**
      * 安卓最近版本
      */
     @Column(name = "android_max_version_name")
-
     private String androidMaxVersionName;
 
     /**
      * 安卓版本
      */
     @Column(name = "android_max_version")
-
     private String androidMaxVersion;
 
     /**
      * 安卓最低兼容版本
      */
     @Column(name = "android_min_version")
-
     private String androidMinVersion;
 
     /**
      * ios最近版本
      */
     @Column(name = "ios_max_version_name")
-
     private String iosMaxVersionName;
 
     /**
      * iso最新版本
      */
     @Column(name = "ios_max_version")
-
     private String iosMaxVersion;
 
     /**
      * ios最低兼容版本
      */
     @Column(name = "ios_min_version")
-
     private String iosMinVersion;
 
-
-    @Column(name = "ios_status")
-
-    private Integer iosStatus;
     /**
-     *
+     * 0 审核中，1已审核
+     */
+    @Column(name = "ios_status")
+    private Integer iosStatus;
+
+    /**
      * 创建时间
      */
     @Column(name = "create_time")
-
     private Date createTime;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
-
     private Date updateTime;
-
-
 
     private static final long serialVersionUID = 1L;
 
@@ -148,7 +128,23 @@ public class AppVersion implements Serializable {
         this.description = description;
     }
 
+    /**
+     * 获取安卓最近版本
+     *
+     * @return android_max_version_name - 安卓最近版本
+     */
+    public String getAndroidMaxVersionName() {
+        return androidMaxVersionName;
+    }
 
+    /**
+     * 设置安卓最近版本
+     *
+     * @param androidMaxVersionName 安卓最近版本
+     */
+    public void setAndroidMaxVersionName(String androidMaxVersionName) {
+        this.androidMaxVersionName = androidMaxVersionName;
+    }
 
     /**
      * 获取安卓版本
@@ -186,7 +182,23 @@ public class AppVersion implements Serializable {
         this.androidMinVersion = androidMinVersion;
     }
 
+    /**
+     * 获取ios最近版本
+     *
+     * @return ios_max_version_name - ios最近版本
+     */
+    public String getIosMaxVersionName() {
+        return iosMaxVersionName;
+    }
 
+    /**
+     * 设置ios最近版本
+     *
+     * @param iosMaxVersionName ios最近版本
+     */
+    public void setIosMaxVersionName(String iosMaxVersionName) {
+        this.iosMaxVersionName = iosMaxVersionName;
+    }
 
     /**
      * 获取iso最新版本
@@ -225,6 +237,24 @@ public class AppVersion implements Serializable {
     }
 
     /**
+     * 获取0 审核中，1已审核
+     *
+     * @return ios_status - 0 审核中，1已审核
+     */
+    public Integer getIosStatus() {
+        return iosStatus;
+    }
+
+    /**
+     * 设置0 审核中，1已审核
+     *
+     * @param iosStatus 0 审核中，1已审核
+     */
+    public void setIosStatus(Integer iosStatus) {
+        this.iosStatus = iosStatus;
+    }
+
+    /**
      * 获取创建时间
      *
      * @return create_time - 创建时间
@@ -260,53 +290,26 @@ public class AppVersion implements Serializable {
         this.updateTime = updateTime;
     }
 
-
-    public String getAndroidMaxVersionName() {
-        return androidMaxVersionName;
-    }
-
-    public void setAndroidMaxVersionName(String androidMaxVersionName) {
-        this.androidMaxVersionName = androidMaxVersionName;
-    }
-
-
-    public AppVersion(String iosMaxVersionName) {
-        this.iosMaxVersionName = iosMaxVersionName;
-    }
-
-
-    public String getIosMaxVersionName() {
-        return iosMaxVersionName;
-    }
-
-    public void setIosMaxVersionName(String iosMaxVersionName) {
-        this.iosMaxVersionName = iosMaxVersionName;
-    }
-
-    public Integer getIosStatus() {
-        return iosStatus;
-    }
-
-    public void setIosStatus(Integer iosStatus) {
-        this.iosStatus = iosStatus;
-    }
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("AppVersion{");
-        sb.append("id=").append(id);
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
         sb.append(", appId=").append(appId);
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", androidMaxVersionName='").append(androidMaxVersionName).append('\'');
-        sb.append(", androidMaxVersion='").append(androidMaxVersion).append('\'');
-        sb.append(", androidMinVersion='").append(androidMinVersion).append('\'');
-        sb.append(", iosMaxVersionName='").append(iosMaxVersionName).append('\'');
-        sb.append(", iosMaxVersion='").append(iosMaxVersion).append('\'');
-        sb.append(", iosMinVersion='").append(iosMinVersion).append('\'');
+        sb.append(", description=").append(description);
+        sb.append(", androidMaxVersionName=").append(androidMaxVersionName);
+        sb.append(", androidMaxVersion=").append(androidMaxVersion);
+        sb.append(", androidMinVersion=").append(androidMinVersion);
+        sb.append(", iosMaxVersionName=").append(iosMaxVersionName);
+        sb.append(", iosMaxVersion=").append(iosMaxVersion);
+        sb.append(", iosMinVersion=").append(iosMinVersion);
         sb.append(", iosStatus=").append(iosStatus);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append('}');
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
         return sb.toString();
     }
 }

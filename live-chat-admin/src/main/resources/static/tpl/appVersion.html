@@ -29,6 +29,7 @@
                         <th>ios最新版本号</th>
                         <th>ios最新版本名称</th>
                         <th>ios最低兼容版本号</th>
+                        <td>ios审核开关</td>
                         <td>更新时间</td>
                         <td>创建时间</td>
                     </tr>
@@ -43,6 +44,7 @@
                         <td>{{x.iosMaxVersion}}</td>
                         <td>{{x.iosMaxVersionName}}</td>
                         <td>{{x.iosMinVersion}}</td>
+                        <td>{{x.iosStatus==0?"审核中":"已审核"}}</td>
                         <td>{{x.createTime}}</td>
                         <td>{{x.updateTime}}</td>
                     </tr>
@@ -81,6 +83,13 @@
                             <div class="form-group">
                                 <label>ios最低兼容版本号：</label>
                                 <input class="form-control input-sm" type="text" ng-model="version.iosMinVersion"/>
+                            </div><!-- /form-group -->
+                            <div class="form-group">
+                                <label>审核开关：</label>
+                                <select class="form-control input-sm" id="type-select" ng-model="version.iosStatus" style="display:inline-block; width:100px;">
+                                    <option value="0">审核中</option>
+                                    <option value="1">已审核</option>
+                                </select>
                             </div><!-- /form-group -->
                             <button type="submit" class="btn btn-success btn-sm" ng-click="reset()">提交</button>
                         </form>

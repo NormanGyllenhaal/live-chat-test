@@ -33,9 +33,6 @@
                     <th>每日男男匹配总次数</th>
                     <th>每日男性匹配成功次数</th>
                     <th>每日女性匹配成功次数</th>
-                    <th>每日男男匹配成功次数</th>
-                    <th>每日男女匹配成功次数</th>
-                    <th>每日女女匹配成功次数</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,9 +47,41 @@
                     <td>{{nowData.matchBoyBoyCount}}</td>
                     <td>{{nowData.matchBoySuccessCount}}</td>
                     <td>{{nowData.matchGirlSuccessCount}}</td>
-                    <td>{{nowData.matchBoyBoySuccessCount}}</td>
-                    <td>{{nowData.matchBoyGirlSuccessCount}}</td>
-                    <td>{{nowData.matchGirlGirlSuccessCount}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>每日付费匹配总人数</th>
+                    <th>每日付费匹配总次数</th>
+                    <th>每日男性付费总人数</th>
+                    <th>每日男性付费总次数</th>
+                    <th>每日女性付费总人数</th>
+                    <th>每日女性付费总次数</th>
+                    <th>每日android付费总人数</th>
+                    <th>每日android付费总次数</th>
+                    <th>每日ios付费总人数</th>
+                    <th>每日ios付费总次数</th>
+                    <th>每日男性付费匹配无人次数</th>
+                    <th>每日男性付费匹配成功次数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{nowData.matchPayPeople}}</td>
+                    <td>{{nowData.matchPayCount}}</td>
+                    <td>{{nowData.matchBoyPayPeople}}</td>
+                    <td>{{nowData.matchBoyPayCount}}</td>
+                    <td>{{nowData.matchGirlPayPeople}}</td>
+                    <td>{{nowData.matchGirlPayCount}}</td>
+                    <td>{{nowData.matchAndroidPayPeople}}</td>
+                    <td>{{nowData.matchAndroidPayCount}}</td>
+                    <td>{{nowData.matchIosPayPeople}}</td>
+                    <td>{{nowData.matchIosPayCount}}</td>
+                    <td>{{nowData.matchBoyPayFailCount}}</td>
+                    <td>{{nowData.matchBoyPaySuccessCount}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -77,9 +106,6 @@
                     <th>每日男男匹配总次数</th>
                     <th>每日男性匹配成功次数</th>
                     <th>每日女性匹配成功次数</th>
-                    <th>每日男男匹配成功次数</th>
-                    <th>每日男女匹配成功次数</th>
-                    <th>每日女女匹配成功次数</th>
                     <th>时间</th>
                 </tr>
                 </thead>
@@ -95,9 +121,43 @@
                     <td>{{x.matchBoyBoyCount}}</td>
                     <td>{{x.matchBoySuccessCount}}</td>
                     <td>{{x.matchGirlSuccessCount}}</td>
-                    <td>{{x.matchBoyBoySuccessCount}}</td>
-                    <td>{{x.matchBoyGirlSuccessCount}}</td>
-                    <td>{{x.matchGirlGirlSuccessCount}}</td>
+                    <td>{{x.createTime |  date:'yyyy-MM-dd'}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>每日付费匹配总人数</th>
+                    <th>每日付费匹配总次数</th>
+                    <th>每日男性付费总人数</th>
+                    <th>每日男性付费总次数</th>
+                    <th>每日女性付费总人数</th>
+                    <th>每日女性付费总次数</th>
+                    <th>每日android付费总人数</th>
+                    <th>每日android付费总次数</th>
+                    <th>每日ios付费总人数</th>
+                    <th>每日ios付费总次数</th>
+                    <th>每日男性付费匹配无人次数</th>
+                    <th>每日男性付费匹配成功次数</th>
+                    <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in data">
+                    <td>{{x.matchPayPeople}}</td>
+                    <td>{{x.matchPayCount}}</td>
+                    <td>{{x.matchBoyPayPeople}}</td>
+                    <td>{{x.matchBoyPayCount}}</td>
+                    <td>{{x.matchGirlPayPeople}}</td>
+                    <td>{{x.matchGirlPayCount}}</td>
+                    <td>{{x.matchAndroidPayPeople}}</td>
+                    <td>{{x.matchAndroidPayCount}}</td>
+                    <td>{{x.matchIosPayPeople}}</td>
+                    <td>{{x.matchIosPayCount}}</td>
+                    <td>{{x.matchBoyPayFailCount}}</td>
+                    <td>{{x.matchBoyPaySuccessCount}}</td>
                     <td>{{x.createTime |  date:'yyyy-MM-dd'}}</td>
                 </tr>
                 </tbody>

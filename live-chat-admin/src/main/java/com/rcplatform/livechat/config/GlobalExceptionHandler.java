@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Response<Object> defaultErrorHandler(HttpServletRequest req, Exception e) {
-        logger.error("服务器异常",e.getStackTrace());
+        logger.error("服务器异常",e);
         Response<Object> response = new Response<>(StatEnum.STAT_ERROR.key(), StatEnum.STAT_ERROR.desc());
         return response;
     }

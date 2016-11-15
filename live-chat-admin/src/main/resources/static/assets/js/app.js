@@ -1,8 +1,8 @@
 /**
  * Created by admin on 2016/9/18.
  */
-var server = "http://livechat.rcplatformhk.com:8100";
-//var server = "http://localhost:8100";
+//var server = "http://livechat.rcplatformhk.com:8100";
+var server = "http://localhost:8100";
 var format = function (date) {
     var fmt = "yyyy-MM-dd";
     var o = {
@@ -249,6 +249,22 @@ animateApp.config(function ($routeProvider) {
         .when('/dau', {
             templateUrl: 'tpl/dau.html',
             controller: 'dauController'
+        })
+        .when('/freeCommodity', {
+            templateUrl: 'tpl/freeCommodity.html',
+            controller: 'freeCommodityController'
+        })
+        .when('/reportSetting', {
+            templateUrl: 'tpl/reportSetting.html',
+            controller: 'reportSettingController'
+        })
+        .when('/offUser', {
+            templateUrl: 'tpl/offUser.html',
+            controller: 'offUserController'
+        })
+        .when('/offUserTotal', {
+            templateUrl: 'tpl/offUserTotal.html',
+            controller: 'offUserTotalController'
         })
         // about page
         .when('/userInfo', {
@@ -614,7 +630,8 @@ animateApp.controller("appVersionController", function ($scope, $http, ngTip) {
         }
         $scope.reset = function () {
             $http.post(server + "/appVersion/updateAppVersion.json", $scope.version).success(function (data) {
-                if (data.status == 10000) {
+                console.log(data);
+                if (data.id != null) {
                     $scope.list = data;
                     $scope.isShow = false;
                     ngTip.tip('修改成功', 'success');
@@ -626,6 +643,80 @@ animateApp.controller("appVersionController", function ($scope, $http, ngTip) {
         }
     });
 });
+
+// 免费商品
+animateApp.controller("freeCommodityController", function ($scope, $http, ngTip) {
+    $scope.isShow = false;
+    var url = server + "/freeCommodity.json?";
+    $http.get(url + "adminId=" + adminId).success(function (response) {
+        console.log(response);
+        $scope.list = response;
+        $scope.modify = function (x) {
+            $scope.isShow = true;
+            console.log(x);
+            $scope.freeCommodity = x;
+        }
+        $scope.reset = function () {
+            $http.post(server + "/freeCommodity.json", $scope.freeCommodity).success(function (data) {
+                console.log(data);
+                if (data[0]!= null) {
+                    $scope.list = data;
+                    $scope.isShow = false;
+                    ngTip.tip('修改成功', 'success');
+                } else {
+                    ngTip.tip(data.msg, 'danger');
+                }
+            })
+        }
+    });
+});
+
+
+// 用户封号设置
+animateApp.controller("reportSettingController", function ($scope, $http, ngTip) {
+    $scope.isShow = false;
+    var url = server + "/reportSetting.json?";
+    $http.get(url + "adminId=" + adminId).success(function (response) {
+        console.log(response);
+        $scope.list = response;
+        $scope.modify = function (x) {
+            $scope.isShow = true;
+            console.log(x);
+            $scope.reportSetting = x;
+        }
+        $scope.reset = function () {
+            $http.put(server + "/reportSetting.json", $scope.reportSetting).success(function (data) {
+                console.log(data);
+                if (data[0]!= null) {
+                    $scope.list = data;
+                    $scope.isShow = false;
+                    ngTip.tip('修改成功', 'success');
+                } else {
+                    ngTip.tip(data.msg, 'danger');
+                }
+            })
+        }
+    });
+});
+
+
+// 当前被封号用户
+animateApp.controller('offUserController', function ($scope, $http, Pagination, $location, $log) {
+    $scope.pageClass = 'page-1';
+    var url = server + "/report/reportRecord.json?";
+    $http.get(url + "adminId=" + adminId).success(function (response) {
+        console.log(response);
+    });
+});
+
+// 累计封号用户
+animateApp.controller('offUserTotalController', function ($scope, $http, Pagination, $location, $log) {
+    $scope.pageClass = 'page-1';
+    image($scope, $http, Pagination, $location, $log);
+});
+
+
+
 
 var image = function ($scope, $http, Pagination, $location, $log) {
     Array.prototype.indexOf = function (val) {
@@ -689,6 +780,9 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 console.log($scope.choseArr);
             }
         };
+        $scope.offUserAndDelete = function (id) {
+
+        }
 
         $scope.handle = function (result, id, how) {// 操作CURD
             var array = [];
@@ -825,6 +919,7 @@ var report = function ($scope, $http, Pagination, $location) {
         this.adminId = adminId;
         this.list = imgChecked;
     }
+
     $scope.param = {adminId: adminId, pageNo: 1, pageSize: 8};
     $http.get(url, {params: $scope.param}).success(function (response) {
         $scope.list = response.list;
@@ -877,6 +972,14 @@ var report = function ($scope, $http, Pagination, $location) {
                 handle(2, 4, id);
             } else {
                 handle(2, 4);
+            }
+        }
+        $scope.offUserAndDelete = function(id){
+            if (id != undefined && id.length != 0) {
+                console.log(id);
+                handle(1, 5, id);
+            } else {
+                handle(1, 5);
             }
         }
         var handle = function (result, handleWay, id) {

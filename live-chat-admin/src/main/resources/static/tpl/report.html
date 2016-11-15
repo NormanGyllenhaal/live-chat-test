@@ -82,6 +82,7 @@
                                 <button type="button" class="btn btn-xs btn-danger" ng-click="deleteBackground(report.id)"><i class="fa fa-trash-o"></i>删除背景</button>
                                 <button  class="btn btn-xs btn-danger" ng-click="deleteHeadImg(report.id)"> <i class="fa fa-trash-o"></i>删除头像</button>
                                 <button  class="btn btn-xs btn-danger" ng-click="deleteAll(report.id)"><i class="fa fa-trash-o"></i>全部删除</button>
+                                <button  class="btn btn-xs btn-danger" ng-click="offUserAndDelete(report.id)"><i class="fa fa-check"></i> 删除并禁用账号6小时</button>
                                 <button  class="btn btn-xs btn-success" ng-click="pass(report.id)"><i class="fa fa-check"></i> 忽略举报</button>
                             </span>
                             <div class="image-time"> 在 {{report.createTime}} 被 {{report.reportUserName}} 举报</div>

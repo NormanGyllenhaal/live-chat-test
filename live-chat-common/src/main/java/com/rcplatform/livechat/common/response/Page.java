@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yang peng on 2016/8/4.
  */
 
-public class Page implements Serializable {
+public class Page<E> implements Serializable {
 
     /**
      * 总条数
@@ -32,7 +32,7 @@ public class Page implements Serializable {
     /**
      * list 列表
      */
-    private List list;
+    private List<E> list;
 
     public Page() {
     }

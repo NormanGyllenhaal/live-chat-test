@@ -6,11 +6,14 @@ import com.rcplatform.livechat.common.enums.ReportIsHandleEnum;
 import com.rcplatform.livechat.common.enums.ReportPageEnum;
 import com.rcplatform.livechat.common.enums.ReportResultEnum;
 import com.rcplatform.livechat.common.response.Page;
+import com.rcplatform.livechat.common.util.DateUtil;
 import com.rcplatform.livechat.common.util.StringUtil;
 import com.rcplatform.livechat.dto.request.ReportAdminReqDto;
 import com.rcplatform.livechat.mapper.ReportMapper;
+import com.rcplatform.livechat.mapper.ReportRecordMapper;
 import com.rcplatform.livechat.mapper.UserMapper;
 import com.rcplatform.livechat.model.Report;
+import com.rcplatform.livechat.model.ReportRecord;
 import com.rcplatform.livechat.model.User;
 import com.rcplatform.livechat.service.AbstractService;
 import com.rcplatform.livechat.service.IReportService;
@@ -21,8 +24,10 @@ import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static com.rcplatform.livechat.common.constant.RedisKeyConstant.*;
 
@@ -40,6 +45,13 @@ public class ReportServiceImpl extends AbstractService implements IReportService
 
     @Resource
     private RedisTemplate redisTemplate;
+
+
+
+    @Resource
+    private ReportRecordMapper reportRecordMapper;
+
+
 
     /**
      * 获取举报信息列表
@@ -86,9 +98,50 @@ public class ReportServiceImpl extends AbstractService implements IReportService
                     userMapper.updateByPrimaryKeySelective(new User(report.getReportedUserId(),"",null,new Date()));
                 }else if(reportDto.getHandleWay().equals(ReportHandleWayEnum.HEAD_BACKGROUND.key())){
                     userMapper.updateByPrimaryKeySelective(new User(report.getReportedUserId(),"","",new Date()));
+                }else if(reportDto.getHandleWay().equals(ReportHandleWayEnum.DELETE_AND_OFF.key())){
+                    final String systemReportKey = StringUtil.buildString(APP_NAME, REPORT);
+                    final String systemReportTimeKey = StringUtil.buildString(APP_NAME, REPORT_TIME);
+                    reportRecordMapper.insertSelective(new ReportRecord(report.getReportedUserId(),new Date(),6));
+                    userMapper.updateByPrimaryKeySelective(new User(report.getReportedUserId(),"","",new Date()));
+                    redisTemplate.execute(new SessionCallback<Object>() {
+                        @Override
+                        public  Object execute(RedisOperations operations) throws DataAccessException {
+                            operations.opsForSet().add(systemReportKey, report.getReportedUserId().toString());
+                            operations.opsForZSet().add(systemReportTimeKey,report.getReportedUserId().toString(), DateUtil.getDatePlusHour(new Date(), 6).getTime());
+                            return null;
+                        }
+                    });
                 }
             }
         }
         return getReport(reportAdminReqDto.getAdminId(),1,8);
     }
+
+
+
+
+
+
+    public Page<ReportRecord> getReportRecord(Integer pageNo,Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize,"create_time desc");
+        List<ReportRecord> reportRecords = reportRecordMapper.selectAll();
+        return getPage(reportRecords);
+    }
+
+
+
+    @Override
+    public List<User> getOffUser() {
+        final String systemReportKey = StringUtil.buildString(APP_NAME, REPORT);
+        String userInfoKey = StringUtil.buildString(APP_NAME, USER, 1);
+        Set set = redisTemplate.opsForSet().members(systemReportKey);
+        List<User> list = new ArrayList<>();
+        for(Object str:set){
+            User user = (User) redisTemplate.opsForHash().get(userInfoKey, str);
+            list.add(user);
+        }
+        return list;
+    }
+
+
 }

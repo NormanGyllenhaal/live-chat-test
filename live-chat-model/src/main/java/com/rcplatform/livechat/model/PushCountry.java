@@ -10,6 +10,9 @@ import java.util.Date;
 public class PushCountry implements Serializable {
 
 
+    public PushCountry() {
+    }
+
     public PushCountry(Integer pushId, String countryId, Integer isPush, Date pushTime, Date createTime) {
         this.pushId = pushId;
         this.countryId = countryId;
@@ -21,9 +24,6 @@ public class PushCountry implements Serializable {
     public PushCountry(Integer id, Integer isPush) {
         this.id = id;
         this.isPush = isPush;
-    }
-
-    public PushCountry() {
     }
 
     /**

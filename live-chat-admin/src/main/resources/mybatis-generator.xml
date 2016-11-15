@@ -46,7 +46,20 @@
                              targetProject="F:\ideaproject\live-chat\live-chat-admin\src\main\java"/>
 
 
-        <table tableName="rc_push_country" domainObjectName="PushCountry"/>
+
+
+
+        <!--<table tableName="rc_push_country" domainObjectName="PushCountry"/>-->
+
+      <!--
+        <table tableName="rc_match_num_day" domainObjectName="MatchNumDay"/>
+       <table tableName="rc_match_stat" domainObjectName="MatchStat"/>
+       <table tableName="rc_report_record" domainObjectName="ReportRecord"></table>
+        <table tableName="rc_report_setting" domainObjectName="ReportSetting"></table>
+        <table tableName="rc_app_version" domainObjectName="AppVersion"/>-->
+        <table tableName="rc_free_commodity" domainObjectName="FreeCommodity"/>
+
+
 
 
     </context>

@@ -8,12 +8,13 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="app_id" jdbcType="INTEGER" property="appId" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="android_max_version_name" jdbcType="CHAR" property="androidMaxVersionName" />
+    <result column="android_max_version_name" jdbcType="VARCHAR" property="androidMaxVersionName" />
     <result column="android_max_version" jdbcType="VARCHAR" property="androidMaxVersion" />
     <result column="android_min_version" jdbcType="VARCHAR" property="androidMinVersion" />
-    <result column="ios_max_version_name" jdbcType="CHAR" property="iosMaxVersionName" />
+    <result column="ios_max_version_name" jdbcType="VARCHAR" property="iosMaxVersionName" />
     <result column="ios_max_version" jdbcType="VARCHAR" property="iosMaxVersion" />
     <result column="ios_min_version" jdbcType="VARCHAR" property="iosMinVersion" />
+    <result column="ios_status" jdbcType="TINYINT" property="iosStatus" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>

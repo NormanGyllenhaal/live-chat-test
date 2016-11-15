@@ -7,9 +7,6 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="use_id" jdbcType="INTEGER" property="useId" />
-    <result column="off_count" jdbcType="INTEGER" property="offCount" />
-    <result column="report_num" jdbcType="INTEGER" property="reportNum" />
-    <result column="reported_num" jdbcType="INTEGER" property="reportedNum" />
     <result column="off_time" jdbcType="TIMESTAMP" property="offTime" />
     <result column="off_duration" jdbcType="INTEGER" property="offDuration" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />

@@ -63,6 +63,7 @@ public class PushTask {
     @Autowired
     private PushCountryMapper pushCountryMapper;
 
+
     @Autowired
     private PushLanguageMapper pushLanguageMapper;
 

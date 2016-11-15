@@ -1,6 +1,5 @@
 package com.rcplatform.livechat.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,8 +7,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_report_record")
-
 public class ReportRecord implements Serializable {
+
+    public ReportRecord() {
+    }
+
+    public ReportRecord(Integer useId, Date offTime, Integer offDuration) {
+        this.useId = useId;
+        this.offTime = offTime;
+        this.offDuration = offDuration;
+    }
+
     /**
      * 主键
      */
@@ -20,56 +28,30 @@ public class ReportRecord implements Serializable {
      * 用户id
      */
     @Column(name = "use_id")
-
     private Integer useId;
-
-    /**
-     * 累计被封禁的次数
-     */
-    @Column(name = "off_count")
-
-    private Integer offCount;
-
-    /**
-     * 举报别人的次数
-     */
-    @Column(name = "report_num")
-
-    private Integer reportNum;
-
-    /**
-     * 被举报的次数
-     */
-    @Column(name = "reported_num")
-
-    private Integer reportedNum;
 
     /**
      * 禁用的时间
      */
     @Column(name = "off_time")
-
     private Date offTime;
 
     /**
      * 禁用的时间长度 ，小时
      */
     @Column(name = "off_duration")
-
     private Integer offDuration;
 
     /**
      * 更新时间
      */
     @Column(name = "update_time")
-
     private Date updateTime;
 
     /**
      * 记录创建时间
      */
     @Column(name = "create_time")
-
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -108,60 +90,6 @@ public class ReportRecord implements Serializable {
      */
     public void setUseId(Integer useId) {
         this.useId = useId;
-    }
-
-    /**
-     * 获取累计被封禁的次数
-     *
-     * @return off_count - 累计被封禁的次数
-     */
-    public Integer getOffCount() {
-        return offCount;
-    }
-
-    /**
-     * 设置累计被封禁的次数
-     *
-     * @param offCount 累计被封禁的次数
-     */
-    public void setOffCount(Integer offCount) {
-        this.offCount = offCount;
-    }
-
-    /**
-     * 获取举报别人的次数
-     *
-     * @return report_num - 举报别人的次数
-     */
-    public Integer getReportNum() {
-        return reportNum;
-    }
-
-    /**
-     * 设置举报别人的次数
-     *
-     * @param reportNum 举报别人的次数
-     */
-    public void setReportNum(Integer reportNum) {
-        this.reportNum = reportNum;
-    }
-
-    /**
-     * 获取被举报的次数
-     *
-     * @return reported_num - 被举报的次数
-     */
-    public Integer getReportedNum() {
-        return reportedNum;
-    }
-
-    /**
-     * 设置被举报的次数
-     *
-     * @param reportedNum 被举报的次数
-     */
-    public void setReportedNum(Integer reportedNum) {
-        this.reportedNum = reportedNum;
     }
 
     /**
@@ -244,9 +172,6 @@ public class ReportRecord implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", useId=").append(useId);
-        sb.append(", offCount=").append(offCount);
-        sb.append(", reportNum=").append(reportNum);
-        sb.append(", reportedNum=").append(reportedNum);
         sb.append(", offTime=").append(offTime);
         sb.append(", offDuration=").append(offDuration);
         sb.append(", updateTime=").append(updateTime);

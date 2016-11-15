@@ -5,10 +5,7 @@ import com.rcplatform.livechat.common.response.Page;
 import com.rcplatform.livechat.dto.request.ImgAdminReqDto;
 import com.rcplatform.livechat.dto.request.UserHeadImgReqDto;
 import com.rcplatform.livechat.service.IUserHeadImgService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -46,6 +43,17 @@ public class UserHeadImgController {
     @ResponseBody
     public Page handleImg(@RequestBody UserHeadImgReqDto userHeadImgReqDto){
         return userHeadImgService.handleImg(userHeadImgReqDto);
+    }
+
+
+    /**
+     * 删除图片
+     * @return
+     */
+    @RequestMapping(value="image/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public Page deleteImg(@PathVariable("id") Integer id,Integer pageNo,Integer pageSize){
+        return null;
     }
 
 }

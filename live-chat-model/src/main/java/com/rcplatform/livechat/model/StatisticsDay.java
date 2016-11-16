@@ -1,6 +1,5 @@
 package com.rcplatform.livechat.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,7 +7,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "rc_statistics_day")
-
 public class StatisticsDay implements Serializable {
     @Id
     private Integer id;
@@ -17,322 +15,306 @@ public class StatisticsDay implements Serializable {
      * 筛选女性的点击数
      */
     @Column(name = "woman_click")
-
     private Integer womanClick;
 
     /**
      * 筛选男性的点击数
      */
     @Column(name = "boy_click")
-
     private Integer boyClick;
 
     /**
      * 筛选全部的点击数
      */
     @Column(name = "both_click")
-
     private Integer bothClick;
 
     /**
      * 匹配跳过的次数
      */
     @Column(name = "match_skip_count")
-
     private Integer matchSkipCount;
 
     /**
      * 男性使用kiss 的次数
      */
     @Column(name = "kiss_boy_count")
-
     private Integer kissBoyCount;
 
     /**
      * 女性使用kiss 的次数
      */
     @Column(name = "kiss_girl_count")
-
     private Integer kissGirlCount;
 
     /**
      * 送花的次数
      */
     @Column(name = "flower_count")
-
     private Integer flowerCount;
 
     /**
      * 巴掌的使用次数
      */
     @Column(name = "hand_count")
-
     private Integer handCount;
 
     /**
      * 视频时男性退出使用的次数
      */
     @Column(name = "video_boy_leave_count")
-
     private Integer videoBoyLeaveCount;
 
     /**
      * 视频时男性退出的人数
      */
     @Column(name = "video_boy_leave_people")
-
     private Integer videoBoyLeavePeople;
 
     /**
      * 视频时女性退出使用的次数
      */
     @Column(name = "video_girl_leave_count")
-
     private Integer videoGirlLeaveCount;
 
     /**
      * 视频时女性退出使用的次数
      */
     @Column(name = "video_girl_leave_people")
-
     private Integer videoGirlLeavePeople;
 
     /**
      * 男性退出的时长
      */
     @Column(name = "video_boy_leave_time")
-
     private Integer videoBoyLeaveTime;
 
     /**
      * 女性退出的时长
      */
     @Column(name = "video_girl_leave_time")
-
     private Integer videoGirlLeaveTime;
 
     /**
      * 随机视频匹配的视频通话总时长
      */
     @Column(name = "match_video_time")
-
     private Integer matchVideoTime;
 
     /**
      * 随机匹配的视频总人数
      */
     @Column(name = "match_video_people")
-
     private Integer matchVideoPeople;
 
     /**
      * 双向好友累计
      */
     @Column(name = "both_friend_total")
-
     private Integer bothFriendTotal;
 
     /**
      * 双向好友新增
      */
     @Column(name = "both_friend_day")
-
     private Integer bothFriendDay;
 
     /**
      * 匹配时成为好友的总人数
      */
     @Column(name = "video_befriend_count")
-
     private Integer videoBefriendCount;
 
     /**
      * 女性在视频时添加好友的次数
      */
     @Column(name = "video_girl_add_friend_count")
-
     private Integer videoGirlAddFriendCount;
 
     /**
      * 3分钟到时提示继续加好友成功次数
      */
     @Column(name = "three_chat_add_friend_count")
-
     private Integer threeChatAddFriendCount;
 
     /**
      * 3分钟到时提示继续 男性离开次数
      */
     @Column(name = "three_chat_boy_leave_count")
-
     private Integer threeChatBoyLeaveCount;
 
     /**
      * 3分钟到时提示继续女性离开次数
      */
     @Column(name = "three_chat_girl_leave_count")
-
     private Integer threeChatGirlLeaveCount;
 
     /**
      * 3分钟以内聊天平均时长
      */
     @Column(name = "three_chat_avg_time")
-
     private Integer threeChatAvgTime;
 
     /**
      * 聊天到达3分钟的次数
      */
     @Column(name = "three_chat_count")
-
     private Integer threeChatCount;
 
     /**
      * 在匹配列表聊天点击次数
      */
     @Column(name = "match_page_chat_click_count")
-
     private Integer matchPageChatClickCount;
 
     /**
      * 匹配列表男性付费人数
      */
     @Column(name = "boy_pay_people")
-
     private Integer boyPayPeople;
 
     /**
      * 匹配列表男性付费次数
      */
     @Column(name = "boy_pay_count")
-
     private Integer boyPayCount;
 
     /**
      * 匹配列表女性付费人数
      */
     @Column(name = "girl_pay_people")
-
     private Integer girlPayPeople;
 
     /**
      * 匹配列表女性付费次数
      */
     @Column(name = "girl_pay_count")
-
     private Integer girlPayCount;
 
     /**
      * 在匹配列表付费的人数
      */
     @Column(name = "match_page_pay_people")
-
     private Integer matchPagePayPeople;
 
     /**
      * 匹配列表头像点击次数
      */
     @Column(name = "match_page_head_click_count")
-
     private Integer matchPageHeadClickCount;
 
     /**
      * 匹配列表聊天付费次数
      */
     @Column(name = "match_page_pay_count")
-
     private Integer matchPagePayCount;
 
     /**
      * 聊天页面会话的点击人数
      */
     @Column(name = "chat_page_people")
-
     private Integer chatPagePeople;
 
     /**
      * 聊天页面会话的点击次数
      */
     @Column(name = "chat_page_count")
-
     private Integer chatPageCount;
 
     /**
      * 个人主页图片编辑次数
      */
     @Column(name = "image_modify_count")
-
     private Integer imageModifyCount;
 
     /**
      * 应用的分享次数
      */
     @Column(name = "share_num")
-
     private Integer shareNum;
 
     /**
      * 每日视频通话总时长
      */
     @Column(name = "video_time")
-
     private Integer videoTime;
 
     /**
      * 每日视频通话的总人数
      */
     @Column(name = "video_people")
-
     private Integer videoPeople;
 
     /**
      * 每日好友视频通话的总时长
      */
     @Column(name = "friend_video_time")
-
     private Integer friendVideoTime;
 
     /**
      * 每日好友视频通话人数
      */
     @Column(name = "friend_video_people")
-
     private Integer friendVideoPeople;
 
     /**
      * 每日好友视频通话次数
      */
     @Column(name = "friend_video_count")
-
     private Integer friendVideoCount;
 
     /**
      * 女女通话次数
      */
     @Column(name = "girl_girl_video_count")
-
     private Integer girlGirlVideoCount;
 
     /**
      * 男女通话次数
      */
     @Column(name = "boy_girl_video_count")
-
     private Integer boyGirlVideoCount;
 
     /**
      * 男男通话次数
      */
     @Column(name = "boy_boy_video_count")
-
     private Integer boyBoyVideoCount;
+
+    /**
+     * 女性匹配消耗金币总数
+     */
+    @Column(name = "girl_match_gold")
+    private Integer girlMatchGold;
+
+    /**
+     * 男性匹配消耗金币总数
+     */
+    @Column(name = "boy_match_gold")
+    private Integer boyMatchGold;
+
+    /**
+     * android匹配消耗金币总数
+     */
+    @Column(name = "android_match_gold")
+    private Integer androidMatchGold;
+
+    /**
+     * ios匹配消耗金币总数
+     */
+    @Column(name = "ios_match_gold")
+    private Integer iosMatchGold;
+
+    /**
+     * 匹配消耗金币总数
+     */
+    @Column(name = "match_gold")
+    private Integer matchGold;
 
     /**
      * 创建时间
      */
     @Column(name = "create_time")
-
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -1162,6 +1144,96 @@ public class StatisticsDay implements Serializable {
     }
 
     /**
+     * 获取女性匹配消耗金币总数
+     *
+     * @return girl_match_gold - 女性匹配消耗金币总数
+     */
+    public Integer getGirlMatchGold() {
+        return girlMatchGold;
+    }
+
+    /**
+     * 设置女性匹配消耗金币总数
+     *
+     * @param girlMatchGold 女性匹配消耗金币总数
+     */
+    public void setGirlMatchGold(Integer girlMatchGold) {
+        this.girlMatchGold = girlMatchGold;
+    }
+
+    /**
+     * 获取男性匹配消耗金币总数
+     *
+     * @return boy_match_gold - 男性匹配消耗金币总数
+     */
+    public Integer getBoyMatchGold() {
+        return boyMatchGold;
+    }
+
+    /**
+     * 设置男性匹配消耗金币总数
+     *
+     * @param boyMatchGold 男性匹配消耗金币总数
+     */
+    public void setBoyMatchGold(Integer boyMatchGold) {
+        this.boyMatchGold = boyMatchGold;
+    }
+
+    /**
+     * 获取android匹配消耗金币总数
+     *
+     * @return android_match_gold - android匹配消耗金币总数
+     */
+    public Integer getAndroidMatchGold() {
+        return androidMatchGold;
+    }
+
+    /**
+     * 设置android匹配消耗金币总数
+     *
+     * @param androidMatchGold android匹配消耗金币总数
+     */
+    public void setAndroidMatchGold(Integer androidMatchGold) {
+        this.androidMatchGold = androidMatchGold;
+    }
+
+    /**
+     * 获取ios匹配消耗金币总数
+     *
+     * @return ios_match_gold - ios匹配消耗金币总数
+     */
+    public Integer getIosMatchGold() {
+        return iosMatchGold;
+    }
+
+    /**
+     * 设置ios匹配消耗金币总数
+     *
+     * @param iosMatchGold ios匹配消耗金币总数
+     */
+    public void setIosMatchGold(Integer iosMatchGold) {
+        this.iosMatchGold = iosMatchGold;
+    }
+
+    /**
+     * 获取匹配消耗金币总数
+     *
+     * @return match_gold - 匹配消耗金币总数
+     */
+    public Integer getMatchGold() {
+        return matchGold;
+    }
+
+    /**
+     * 设置匹配消耗金币总数
+     *
+     * @param matchGold 匹配消耗金币总数
+     */
+    public void setMatchGold(Integer matchGold) {
+        this.matchGold = matchGold;
+    }
+
+    /**
      * 获取创建时间
      *
      * @return create_time - 创建时间
@@ -1231,6 +1303,11 @@ public class StatisticsDay implements Serializable {
         sb.append(", girlGirlVideoCount=").append(girlGirlVideoCount);
         sb.append(", boyGirlVideoCount=").append(boyGirlVideoCount);
         sb.append(", boyBoyVideoCount=").append(boyBoyVideoCount);
+        sb.append(", girlMatchGold=").append(girlMatchGold);
+        sb.append(", boyMatchGold=").append(boyMatchGold);
+        sb.append(", androidMatchGold=").append(androidMatchGold);
+        sb.append(", iosMatchGold=").append(iosMatchGold);
+        sb.append(", matchGold=").append(matchGold);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

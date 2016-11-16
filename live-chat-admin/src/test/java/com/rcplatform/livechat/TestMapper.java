@@ -63,6 +63,11 @@ public class TestMapper {
         });
     }
 
+    @Test
+    public void testRedisHash(){
+         redisTemplate.opsForHash().get("videochat:user:1", "52");
+    }
+
 
 
 }

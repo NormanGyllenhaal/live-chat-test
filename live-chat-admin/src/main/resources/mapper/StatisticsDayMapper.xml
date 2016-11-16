@@ -51,6 +51,11 @@
     <result column="girl_girl_video_count" jdbcType="INTEGER" property="girlGirlVideoCount" />
     <result column="boy_girl_video_count" jdbcType="INTEGER" property="boyGirlVideoCount" />
     <result column="boy_boy_video_count" jdbcType="INTEGER" property="boyBoyVideoCount" />
+    <result column="girl_match_gold" jdbcType="INTEGER" property="girlMatchGold" />
+    <result column="boy_match_gold" jdbcType="INTEGER" property="boyMatchGold" />
+    <result column="android_match_gold" jdbcType="INTEGER" property="androidMatchGold" />
+    <result column="ios_match_gold" jdbcType="INTEGER" property="iosMatchGold" />
+    <result column="match_gold" jdbcType="INTEGER" property="matchGold" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
@@ -80,7 +85,12 @@
         (SELECT COUNT(distinct user_id) as boy_pay_people FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id WHERE date(a.create_time) = curdate()  AND a.consume_id = 3 AND b.gender = 1) as k,
         (SELECT COUNT(*) as boy_pay_count FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id WHERE date(a.create_time) = curdate()  AND a.consume_id = 3 AND b.gender = 1) as l,
         (SELECT COUNT(distinct user_id) as girl_pay_people FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id WHERE date(a.create_time) = curdate()  AND a.consume_id = 3 AND b.gender = 2) as m,
-         (SELECT COUNT(*) as girl_pay_count FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id WHERE date(a.create_time) = curdate()  AND a.consume_id = 3 AND b.gender = 2) as n
+         (SELECT COUNT(*) as girl_pay_count FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id WHERE date(a.create_time) = curdate()  AND a.consume_id = 3 AND b.gender = 2) as n,
+          (SELECT IFNULL(SUM(c.price),0) as girl_match_gold FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id INNER JOIN rc_consume c on c.id = a.consume_id WHERE date(a.create_time) = curdate()  AND a.consume_id = 5 AND b.gender = 2) as o,
+          (SELECT IFNULL(SUM(c.price),0) as boy_match_gold FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id INNER JOIN rc_consume c on c.id = a.consume_id WHERE date(a.create_time) = curdate()  AND a.consume_id = 5 AND b.gender = 1) as p,
+          (SELECT IFNULL(SUM(c.price),0) as android_match_gold FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id INNER JOIN rc_consume c on c.id = a.consume_id WHERE date(a.create_time) = curdate()  AND a.consume_id = 5 AND b.platform_type = 2) as q,
+          (SELECT IFNULL(SUM(c.price),0) as ios_match_gold FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id INNER JOIN rc_consume c on c.id = a.consume_id WHERE date(a.create_time) = curdate()  AND a.consume_id = 5 AND b.platform_type = 1) as r,
+          (SELECT IFNULL(SUM(c.price),0) as match_gold FROM rc_consume_record a INNER JOIN rc_user b ON a.user_id = b.id INNER JOIN rc_consume c on c.id = a.consume_id WHERE date(a.create_time) = curdate()  AND a.consume_id = 5 ) as s
     </select>
 
     <select id="selectVideo" resultMap="BaseResultMap">
@@ -92,7 +102,7 @@
     </select>
 
     <select id="selectConsume" resultMap="BaseResultMap">
-        SELECT match_page_pay_people,match_page_pay_count,boy_pay_people,boy_pay_count,girl_pay_people,girl_pay_count,create_time FROM rc_statistics_day WHERE  create_time BETWEEN #{beginDate} and #{endDate} ORDER BY create_time DESC
+        SELECT match_page_pay_people,match_page_pay_count,boy_pay_people,boy_pay_count,girl_pay_people,girl_pay_count,girl_match_gold,boy_match_gold,android_match_gold,ios_match_gold,match_gold,create_time FROM rc_statistics_day WHERE  create_time BETWEEN #{beginDate} and #{endDate} ORDER BY create_time DESC
     </select>
 
     <select id="selectUserFriend" resultMap="BaseResultMap">

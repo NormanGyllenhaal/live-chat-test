@@ -138,6 +138,18 @@ public class MatchNumDay implements Serializable {
     private Integer matchBoyPaySuccessCount;
 
     /**
+     * 每日女性付费匹配无人次数
+     */
+    @Column(name = "match_girl_pay_fail_count")
+    private Integer matchGirlPayFailCount;
+
+    /**
+     * 每日女性付费匹配成功次数
+     */
+    @Column(name = "match_girl_pay_success_count")
+    private Integer matchGirlPaySuccessCount;
+
+    /**
      * 每日ios付费总次数
      */
     @Column(name = "match_ios_pay_count")
@@ -544,6 +556,42 @@ public class MatchNumDay implements Serializable {
     }
 
     /**
+     * 获取每日女性付费匹配无人次数
+     *
+     * @return match_girl_pay_fail_count - 每日女性付费匹配无人次数
+     */
+    public Integer getMatchGirlPayFailCount() {
+        return matchGirlPayFailCount;
+    }
+
+    /**
+     * 设置每日女性付费匹配无人次数
+     *
+     * @param matchGirlPayFailCount 每日女性付费匹配无人次数
+     */
+    public void setMatchGirlPayFailCount(Integer matchGirlPayFailCount) {
+        this.matchGirlPayFailCount = matchGirlPayFailCount;
+    }
+
+    /**
+     * 获取每日女性付费匹配成功次数
+     *
+     * @return match_girl_pay_success_count - 每日女性付费匹配成功次数
+     */
+    public Integer getMatchGirlPaySuccessCount() {
+        return matchGirlPaySuccessCount;
+    }
+
+    /**
+     * 设置每日女性付费匹配成功次数
+     *
+     * @param matchGirlPaySuccessCount 每日女性付费匹配成功次数
+     */
+    public void setMatchGirlPaySuccessCount(Integer matchGirlPaySuccessCount) {
+        this.matchGirlPaySuccessCount = matchGirlPaySuccessCount;
+    }
+
+    /**
      * 获取每日ios付费总次数
      *
      * @return match_ios_pay_count - 每日ios付费总次数
@@ -607,6 +655,8 @@ public class MatchNumDay implements Serializable {
         sb.append(", matchIosPayPeople=").append(matchIosPayPeople);
         sb.append(", matchBoyPayFailCount=").append(matchBoyPayFailCount);
         sb.append(", matchBoyPaySuccessCount=").append(matchBoyPaySuccessCount);
+        sb.append(", matchGirlPayFailCount=").append(matchGirlPayFailCount);
+        sb.append(", matchGirlPaySuccessCount=").append(matchGirlPaySuccessCount);
         sb.append(", matchIosPayCount=").append(matchIosPayCount);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -1,5 +1,5 @@
-//var server = "http://livechat.rcplatformhk.com:8100";
-var server = "http://localhost:8100";
+var server = "http://livechat.rcplatformhk.com:8100";
+//var server = "http://localhost:8100";
 $('body').particleground({
     dotColor: '#5cbdaa',
     lineColor: '#5cbdaa'

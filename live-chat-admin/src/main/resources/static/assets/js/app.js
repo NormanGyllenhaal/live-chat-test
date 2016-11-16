@@ -1,8 +1,8 @@
 /**
  * Created by admin on 2016/9/18.
  */
-//var server = "http://livechat.rcplatformhk.com:8100";
-var server = "http://localhost:8100";
+var server = "http://livechat.rcplatformhk.com:8100";
+//var server = "http://localhost:8100";
 var format = function (date) {
     var fmt = "yyyy-MM-dd";
     var o = {
@@ -705,6 +705,7 @@ animateApp.controller('offUserController', function ($scope, $http, Pagination, 
     $scope.pageClass = 'page-1';
     var url = server + "/report/reportRecord.json?";
     $http.get(url + "adminId=" + adminId).success(function (response) {
+        $scope.list = response;
         console.log(response);
     });
 });

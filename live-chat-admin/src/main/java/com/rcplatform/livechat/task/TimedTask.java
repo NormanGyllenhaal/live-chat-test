@@ -48,8 +48,7 @@ public class TimedTask {
 
 
 
-    @Scheduled(cron="0 59 23 * * ?")
-
+    @Scheduled(cron="0 55 23 * * ?")
     public void userStatisticsTask() {
         UserStatistics userStatistics = userStatisticsMapper.selectFromUser();
         userStatisticsMapper.insertSelective(userStatistics);
@@ -59,7 +58,7 @@ public class TimedTask {
 
 
 
-    @Scheduled(cron="0 59 23 * * ?")
+    @Scheduled(cron="0 55 23 * * ?")
     public void statisticsDayTask(){
         StatisticsDay statisticsDay = statisticsDayMapper.selectFromVideoRecord();
         Integer videoBefriendCount = statisticsDayMapper.selectFromAddFriendRecord();
@@ -72,6 +71,11 @@ public class TimedTask {
         statisticsDay.setGirlPayPeople(consumeRecode.getGirlPayPeople());
         statisticsDay.setBoyPayCount(consumeRecode.getBoyPayCount());
         statisticsDay.setBoyPayPeople(consumeRecode.getBoyPayPeople());
+        statisticsDay.setMatchGold(consumeRecode.getMatchGold());
+        statisticsDay.setGirlMatchGold(consumeRecode.getGirlMatchGold());
+        statisticsDay.setBoyMatchGold(consumeRecode.getBoyMatchGold());
+        statisticsDay.setIosMatchGold(consumeRecode.getIosMatchGold());
+        statisticsDay.setAndroidMatchGold(consumeRecode.getAndroidMatchGold());
         statisticsDay.setFriendVideoCount(statisticsDay.getFriendVideoPeople()/2);
         statisticsDay.setBothFriendTotal(bothFriendStatistics.getBothFriendTotal());
         statisticsDay.setBothFriendDay(bothFriendStatistics.getBothFriendDay());
@@ -80,7 +84,7 @@ public class TimedTask {
 
 
 
-    @Scheduled(cron="0 59 23 * * ?")
+    @Scheduled(cron="0 55 23 * * ?")
     public void payStatDayTask(){
         PayStatDay payStatDay = payStatDayMapper.selectPayRecord();
         payStatDayMapper.insertSelective(payStatDay);
@@ -88,7 +92,7 @@ public class TimedTask {
 
 
 
-    @Scheduled(cron="0 59 23 * * ?")
+    @Scheduled(cron="0 55 23 * * ?")
     public void matchNumDayTask(){
         MatchNumDay matchNumDay = matchNumDayMapper.selectJoinMatchStat();
         matchNumDayMapper.insertSelective(matchNumDay);

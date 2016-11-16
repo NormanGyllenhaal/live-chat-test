@@ -17,11 +17,14 @@ import com.rcplatform.livechat.model.ReportRecord;
 import com.rcplatform.livechat.model.User;
 import com.rcplatform.livechat.service.AbstractService;
 import com.rcplatform.livechat.service.IReportService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -51,6 +54,8 @@ public class ReportServiceImpl extends AbstractService implements IReportService
     @Resource
     private ReportRecordMapper reportRecordMapper;
 
+
+    private Logger logger = LoggerFactory.getLogger(ReportServiceImpl.class);
 
 
     /**
@@ -133,13 +138,12 @@ public class ReportServiceImpl extends AbstractService implements IReportService
     @Override
     public List<User> getOffUser() {
         final String systemReportKey = StringUtil.buildString(APP_NAME, REPORT);
-        String userInfoKey = StringUtil.buildString(APP_NAME, USER, 1);
-        Set set = redisTemplate.opsForSet().members(systemReportKey);
-        List<User> list = new ArrayList<>();
-        for(Object str:set){
-            User user = (User) redisTemplate.opsForHash().get(userInfoKey, str);
-            list.add(user);
-        }
+        Set<Integer> set = redisTemplate.opsForSet().members(systemReportKey);
+        List<Integer> userIdList = new ArrayList<>();
+        userIdList.addAll(set);
+        Example example = new Example(User.class);
+        example.createCriteria().andIn("id",userIdList);
+        List<User> list = userMapper.selectByExample(example);
         return list;
     }
 

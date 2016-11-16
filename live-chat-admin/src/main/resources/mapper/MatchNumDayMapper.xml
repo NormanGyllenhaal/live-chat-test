@@ -27,6 +27,8 @@
     <result column="match_ios_pay_people" jdbcType="INTEGER" property="matchIosPayPeople" />
     <result column="match_boy_pay_fail_count" jdbcType="INTEGER" property="matchBoyPayFailCount" />
     <result column="match_boy_pay_success_count" jdbcType="INTEGER" property="matchBoyPaySuccessCount" />
+    <result column="match_girl_pay_fail_count" jdbcType="INTEGER" property="matchGirlPayFailCount" />
+    <result column="match_girl_pay_success_count" jdbcType="INTEGER" property="matchGirlPaySuccessCount" />
     <result column="match_ios_pay_count" jdbcType="INTEGER" property="matchIosPayCount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -58,6 +60,10 @@ m.match_user_id = o.id  WHERE n.gender = 1 AND o.gender = 1  AND date(m.create_t
       (SELECT  COUNT(*) as match_boy_pay_success_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE m.is_pay = 1 and n.gender = 1 and m.result = 1
       AND date(m.create_time) = curdate()) as v,
     (SELECT  COUNT(*) as match_boy_pay_fail_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE m.is_pay = 1 and n.gender = 1 and m.result = 2
-      AND date(m.create_time) = curdate()) as w
+      AND date(m.create_time) = curdate()) as w,
+       (SELECT  COUNT(*) as match_girl_pay_success_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE m.is_pay = 1 and n.gender = 2 and m.result = 1
+      AND date(m.create_time) = curdate()) as x,
+    (SELECT  COUNT(*) as match_girl_pay_fail_count FROM rc_match_stat m INNER JOIN rc_user n on m.user_id = n.id WHERE m.is_pay = 1 and n.gender = 2 and m.result = 2
+      AND date(m.create_time) = curdate()) as y
   </select>
 </mapper>

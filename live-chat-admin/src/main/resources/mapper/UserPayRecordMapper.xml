@@ -42,7 +42,7 @@
 
     <select id="selectJoinUser" resultMap="JoinResultMap">
     select a.id,a.user_id,b.user_name,b.birthday,b.gender,a.commodity_id,c.commodity_name,a.gold_num,a.money,a.verify_result,a.user_device_id,a.pay_platform,a.create_time,a.verify_time from rc_user_pay_record  a INNER  JOIN  rc_user b on a.user_id = b.id
-     INNER JOIN  rc_commodity c ON  a.commodity_id = c.id WHERE a.create_time BETWEEN #{beginTime} AND  #{endTime}
+     INNER JOIN  rc_commodity c ON  a.commodity_id = c.id WHERE a.verify_result = 1 AND a.create_time BETWEEN #{beginTime} AND  #{endTime}
   </select>
 
 </mapper>

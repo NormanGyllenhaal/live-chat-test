@@ -1,6 +1,7 @@
 package com.rcplatform.livechat.config;
 
 import com.rcplatform.livechat.common.enums.StatEnum;
+import com.rcplatform.livechat.common.exception.BaseException;
 import com.rcplatform.livechat.common.response.Response;
 import org.omg.CORBA.Object;
 import org.slf4j.Logger;
@@ -23,8 +24,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Response<Object> defaultErrorHandler(HttpServletRequest req, Exception e) {
-        logger.error("服务器异常",e);
-        Response<Object> response = new Response<>(StatEnum.STAT_ERROR.key(), StatEnum.STAT_ERROR.desc());
+        Response<Object> response;
+        if(e instanceof BaseException){
+             response = new Response<>(((BaseException) e).getStatEnum().key(), ((BaseException) e).getStatEnum().desc());
+        }else{
+            logger.error("服务器异常",e);
+            response = new Response<>(StatEnum.STAT_ERROR.key(), StatEnum.STAT_ERROR.desc());
+        }
         return response;
     }
 }

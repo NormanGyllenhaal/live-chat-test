@@ -1,5 +1,7 @@
 package com.rcplatform.livechat.dto.request;
 
+import java.util.Date;
+
 /**
  * Created by yang peng on 2016/9/20.
  */
@@ -25,6 +27,13 @@ public class ImgAdminReqDto {
 
 
     private Integer type;
+
+
+
+    private Date beginDate;
+
+
+    private Date endDate;
 
 
     public Integer getAdminId() {
@@ -65,5 +74,22 @@ public class ImgAdminReqDto {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

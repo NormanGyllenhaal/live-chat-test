@@ -1,8 +1,8 @@
 /**
  * Created by admin on 2016/9/18.
  */
-var server = "http://livechat.rcplatformhk.com:8100";
-//var server = "http://localhost:8100";
+//var server = "http://livechat.rcplatformhk.com:8100";
+var server = "http://localhost:8100";
 var format = function (date) {
     var fmt = "yyyy-MM-dd";
     var o = {
@@ -190,7 +190,7 @@ Array.prototype.remove = function (val) {
     }
 };
 
-var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'angularPagination', 'ngTip']);
+var animateApp = angular.module('animateApp', ['ngRoute', 'ngAnimate', 'angularPagination', 'ngTip','ui.bootstrap.datetimepicker']);
 var adminId = $.cookie("adminId");
 
 
@@ -510,7 +510,9 @@ animateApp.controller('reportController', function ($scope, $http, Pagination, $
     report($scope, $http, Pagination, $location);
 });
 
+
 // 图片审核 page controller
+
 animateApp.controller('imageController', function ($scope, $http, Pagination, $location, $log) {
     $scope.pageClass = 'page-1';
     image($scope, $http, Pagination, $location, $log);
@@ -720,6 +722,7 @@ animateApp.controller('offUserTotalController', function ($scope, $http, Paginat
 
 
 var image = function ($scope, $http, Pagination, $location, $log) {
+    moment.locale('zh-cn');
     Array.prototype.indexOf = function (val) {
         for (var i = 0; i < this.length; i++) {
             if (this[i] == val) return i;
@@ -734,7 +737,6 @@ var image = function ($scope, $http, Pagination, $location, $log) {
         }
     };
     var url = server + "/img/getImg.json?";
-    console.log(adminId);
     var getArray = function (data) {
         var array = [];
         $.each(data.list, function (name, value) {
@@ -754,9 +756,41 @@ var image = function ($scope, $http, Pagination, $location, $log) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
     }
+    var pageSize = 24;
+    var beginDate = addDay(-1);
+    var endDate = new Date();
+    $scope.param = {adminId: adminId, pageNo: 1, pageSize: pageSize,beginDate:beginDate,endDate:endDate};
+    //时间插件
+    $scope.dateRangeStart = beginDate;
+    $scope.dateRangeEnd = endDate;
+    $scope.startDateOnSetTime = function (newDate, oldDate) {
+        console.log(newDate);
+        console.log($scope.dateRangeEnd);
+        flushData(newDate,$scope.dateRangeEnd);
+    }
 
+    $scope.endDateOnSetTime = function (newDate, oldDate) {
+        console.log($scope.dateRangeStart);
+        console.log(newDate);
+        flushData($scope.dateRangeStart,newDate);
+    }
+    var flushData = function (beginDate,endDate) {
+        $scope.param = {adminId: adminId, pageNo: 1, pageSize: pageSize,beginDate:beginDate,endDate:endDate};
+        $http.post(url, $scope.param).success(function (data) {
+            console.log(data);
+            $scope.imgList = data.list;
+            $scope.allArray = getArray(data);
+            $scope.choseArr = [];
+            $scope.x = false;
+            $scope.master = false;
+            $scope.pagination = Pagination.create({
+                itemsPerPage: pageSize,
+                itemsCount: data.count,
+                maxNumbers: data.pages
+            });
+        });
+    }
 
-    $scope.param = {adminId: adminId, pageNo: 1, pageSize: 8};
     $http.post(url, $scope.param).success(function (response) {
         $scope.imgList = response.list;
         $scope.allArray = getArray(response);//初始化数据
@@ -794,8 +828,7 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 if ($scope.choseArr[0] == "" || $scope.choseArr.length == 0) {//没有选择一个的时候提示
                     alert("请至少选中一条数据进行操作！")
                     return;
-                }
-                ;
+                };
                 for (var i = 0; i < $scope.choseArr.length; i++) {
                     var imgChecked = new ImgChecked($scope.choseArr[i], result);
                     array.push(imgChecked);
@@ -822,7 +855,7 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 $scope.x = false;
                 $scope.master = false;
                 $scope.pagination = Pagination.create({
-                    itemsPerPage: 10,
+                    itemsPerPage: pageSize,
                     itemsCount: data.count,
                     maxNumbers: data.pages
                 });
@@ -844,7 +877,7 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 array.push(imgChecked);
             }
 
-            var imgDto = new ImgDto(adminId, array, $scope.param.gender, $scope.param.type, 1, 6);
+            var imgDto = new ImgDto(adminId, array, $scope.param.gender, $scope.param.type, 1, pageSize);
             console.log(imgDto);
             checkImg(imgDto);
         }
@@ -858,7 +891,7 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 $scope.x = false;
                 $scope.master = false;
                 $scope.pagination = Pagination.create({
-                    itemsPerPage: 10,
+                    itemsPerPage: pageSize,
                     itemsCount: data.count,
                     maxNumbers: data.pages
                 });
@@ -867,14 +900,13 @@ var image = function ($scope, $http, Pagination, $location, $log) {
         };
 
         var pagination = $scope.pagination = Pagination.create({
-            itemsPerPage: 10,
+            itemsPerPage:pageSize ,
             itemsCount: response.count,
             maxNumbers: response.pages
         });
 
         pagination.onChange = function (page) {
-            $scope.param = {adminId: adminId, pageNo: page, pageSize: 8};
-            $scope.param = {adminId: adminId, pageNo: page, pageSize: 8};
+            $scope.param = {adminId: adminId, pageNo: page, pageSize: pageSize};
             $http.post(url, $scope.param).success(function (data) {
                 console.log(data);
                 $scope.imgList = data.list;
@@ -895,6 +927,7 @@ var report = function ($scope, $http, Pagination, $location) {
         }
         return -1;
     };
+
 
     Array.prototype.remove = function (val) {
         var index = this.indexOf(val);
@@ -1168,3 +1201,5 @@ var chartShow = function ($scope, id) {
     myChart.setOption(option);
     window.onresize = myChart.resize;
 }
+
+

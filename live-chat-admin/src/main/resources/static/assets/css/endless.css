@@ -4304,7 +4304,7 @@ input[type="radio"]:active + .custom-radio {
 }
 .gallery-container .gallery-item {
   display: inline-block;
-  width: 25%;
+  width: 12%;
   float: left;
   overflow: hidden;
 }
@@ -4320,7 +4320,7 @@ input[type="radio"]:active + .custom-radio {
 }
 .gallery-container .gallery-item .image-wrapper {
   width: 100%;
-  padding-top: 100%;
+  padding-top: 130%;
 }
 .gallery-container .gallery-item .image-wrapper img {
   display: block;

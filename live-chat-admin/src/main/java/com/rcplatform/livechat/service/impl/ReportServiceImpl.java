@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.rcplatform.livechat.common.constant.RedisKeyConstant.*;
+import static com.rcplatform.livechat.common.util.RedisKeyFactory.getKey;
 
 /**
  * Created by Administrator on 2016/9/11.
@@ -80,20 +81,18 @@ public class ReportServiceImpl extends AbstractService implements IReportService
      */
     @Override
     public Page handleReport(ReportAdminReqDto reportAdminReqDto) {
-        final String key = StringUtil.buildString(APP_NAME, USER_PROFILE);
-        final String girlKey = StringUtil.buildString(APP_NAME, USER_PROFILE_GIRL);
-        final String boyKey = StringUtil.buildString(APP_NAME, USER_PROFILE_BOY);
         for(ReportAdminReqDto.ReportStaticAdmin reportDto:reportAdminReqDto.getList()){
             reportMapper.updateByPrimaryKeySelective(new Report(reportDto.getReportId(),
                     ReportIsHandleEnum.HANDLE.key(),reportDto.getResult(),reportDto.getDescription(),new Date()));
             if(reportDto.getResult().equals(ReportResultEnum.ACCEPT.key())){
                 final Report report = reportMapper.selectByPrimaryKey(reportDto.getReportId());
+                final User user = userMapper.selectByPrimaryKey(report.getReportedUserId());
                 redisTemplate.executePipelined(new SessionCallback() {
                     @Override
                     public Object execute(RedisOperations redisOperations) throws DataAccessException {
-                        redisOperations.opsForZSet().remove(key,report.getReportedUserId().toString());
-                        redisOperations.opsForZSet().remove(girlKey,report.getReportedUserId().toString());
-                        redisOperations.opsForZSet().remove(boyKey,report.getReportedUserId().toString());
+                        redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME),user.getId().toString());
+                        redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME,user.getGender()),user.getId().toString());
+                        redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME,user.getCountryId()),user.getId().toString());
                         return null;
                     }
                 });

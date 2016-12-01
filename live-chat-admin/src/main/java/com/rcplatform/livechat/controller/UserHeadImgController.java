@@ -56,4 +56,18 @@ public class UserHeadImgController {
         return null;
     }
 
+
+
+
+
+    /**
+     * 将一个用户封号
+     * @return
+     */
+    @RequestMapping(value="forbid")
+    @ResponseBody
+    public Page forbidUser(@RequestBody  ImgAdminReqDto imgAdminReqDto){
+        return userHeadImgService.forbidUser(imgAdminReqDto);
+    }
+
 }

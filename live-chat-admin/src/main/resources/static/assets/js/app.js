@@ -258,13 +258,13 @@ animateApp.config(function ($routeProvider) {
             templateUrl: 'tpl/reportSetting.html',
             controller: 'reportSettingController'
         })
-        .when('/offUser', {
-            templateUrl: 'tpl/offUser.html',
-            controller: 'offUserController'
-        })
         .when('/offUserTotal', {
             templateUrl: 'tpl/offUserTotal.html',
             controller: 'offUserTotalController'
+        })
+        .when('/offUser', {
+            templateUrl: 'tpl/offUser.html',
+            controller: 'offUserController'
         })
         // about page
         .when('/userInfo', {
@@ -712,6 +712,7 @@ animateApp.controller('offUserController', function ($scope, $http, Pagination, 
     });
 });
 
+
 // 累计封号用户
 animateApp.controller('offUserTotalController', function ($scope, $http, Pagination, $location, $log) {
     $scope.pageClass = 'page-1';
@@ -783,16 +784,14 @@ var image = function ($scope, $http, Pagination, $location, $log) {
             $scope.choseArr = [];
             $scope.x = false;
             $scope.master = false;
-            $scope.pagination = Pagination.create({
-                itemsPerPage: pageSize,
-                itemsCount: data.count,
-                maxNumbers: data.pages
-            });
+            $scope.pages = data.pages;
         });
     }
 
     $http.post(url, $scope.param).success(function (response) {
         $scope.imgList = response.list;
+        console.log(response.list);
+        $scope.pages = response.pages;
         $scope.allArray = getArray(response);//初始化数据
         $scope.choseArr = [];//定义数组用于存放前端显示
         $scope.x = false;//默认未选中
@@ -803,20 +802,35 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 $scope.choseArr = v;
             } else {
                 $scope.x = false;
+
                 $scope.choseArr = [];
             }
         };
         $scope.chk = function (z, x) {//单选或者多选
+            console.log(x);
             if (x == true) {//选中
+                $("#"+z +"image").css("filter","grayscale(100%)");
                 $scope.choseArr.push(z);
                 console.log($scope.choseArr);
             } else {
+                $("#"+z +"image").removeAttr("style");
                 $scope.choseArr.remove(z);
                 console.log($scope.choseArr);
             }
         };
-        $scope.offUserAndDelete = function (id) {
-
+        $scope.offUserAndDelete = function (userId,imageId) {
+            console.log(userId + "," + imageId);
+            $scope.deleteParam = {adminId: adminId, pageNo: 1, pageSize: pageSize,beginDate:beginDate,endDate:endDate,userId:userId,imageId:imageId};
+            $http.post(server+ "/img/forbid.json", $scope.deleteParam).success(function (data) {
+                console.log(data);
+                $scope.imgList = data.list;
+                $scope.allArray = getArray(data);
+                $scope.choseArr = [];
+                $scope.x = false;
+                $scope.master = false;
+                $scope.pages = data.pages;
+                $location.path('/image');
+            });
         }
 
         $scope.handle = function (result, id, how) {// 操作CURD
@@ -854,11 +868,7 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 $scope.choseArr = [];
                 $scope.x = false;
                 $scope.master = false;
-                $scope.pagination = Pagination.create({
-                    itemsPerPage: pageSize,
-                    itemsCount: data.count,
-                    maxNumbers: data.pages
-                });
+                $scope.pages = data.pages;
                 $location.path('/image');
             });
         }
@@ -890,33 +900,11 @@ var image = function ($scope, $http, Pagination, $location, $log) {
                 $scope.choseArr = [];
                 $scope.x = false;
                 $scope.master = false;
-                $scope.pagination = Pagination.create({
-                    itemsPerPage: pageSize,
-                    itemsCount: data.count,
-                    maxNumbers: data.pages
-                });
+                $scope.pages = data.pages;
                 $location.path('/image');
             });
         };
 
-        var pagination = $scope.pagination = Pagination.create({
-            itemsPerPage:pageSize ,
-            itemsCount: response.count,
-            maxNumbers: response.pages
-        });
-
-        pagination.onChange = function (page) {
-            $scope.param = {adminId: adminId, pageNo: page, pageSize: pageSize};
-            $http.post(url, $scope.param).success(function (data) {
-                console.log(data);
-                $scope.imgList = data.list;
-                $scope.allArray = getArray(data);
-                $scope.choseArr = [];
-                $scope.x = false;
-                $scope.master = false;
-            });
-            console.info('page=', page);
-        };
     });
 }
 

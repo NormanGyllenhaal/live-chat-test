@@ -5,6 +5,8 @@ import com.rcplatform.livechat.common.enums.HeadImgTypeEnum;
 import com.rcplatform.livechat.common.enums.UserHeadImgCheckedEnum;
 import com.rcplatform.livechat.common.enums.UserHeadImgHandleEnum;
 import com.rcplatform.livechat.common.response.Page;
+import com.rcplatform.livechat.common.util.DateUtil;
+import com.rcplatform.livechat.common.util.StringUtil;
 import com.rcplatform.livechat.dto.request.ImgAdminReqDto;
 import com.rcplatform.livechat.dto.request.UserHeadImgReqDto;
 import com.rcplatform.livechat.mapper.UserHeadImgMapper;
@@ -25,7 +27,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.rcplatform.livechat.common.constant.RedisKeyConstant.USER_LOGIN_TIME;
+import static com.rcplatform.livechat.common.constant.RedisKeyConstant.*;
 import static com.rcplatform.livechat.common.util.RedisKeyFactory.getKey;
 
 /**
@@ -87,6 +89,35 @@ public class UserHeadImgServiceImpl extends AbstractService implements IUserHead
             }
         }
         return getImg(userHeadImgReqDto);
+    }
+
+
+
+
+
+
+    @Override
+    public Page forbidUser(final ImgAdminReqDto imgAdminReqDto) {
+        log.info(imgAdminReqDto);
+        Example example = new Example(UserHeadImg.class);
+        example.createCriteria().andEqualTo("userId",imgAdminReqDto.getUserId());
+        userHeadImgMapper.updateByExampleSelective(new UserHeadImg(UserHeadImgCheckedEnum.UNPASS.key(),UserHeadImgHandleEnum.HANDLE.key(),new Date()),example);
+        userMapper.updateByPrimaryKeySelective(new User(imgAdminReqDto.getUserId(),"","",new Date()));
+        final User user = userMapper.selectByPrimaryKey(imgAdminReqDto.getUserId());
+        final String systemReportKey = StringUtil.buildString(APP_NAME, REPORT);
+        final String systemReportTimeKey = StringUtil.buildString(APP_NAME, REPORT_TIME);
+        redisTemplate.executePipelined(new SessionCallback() {
+            @Override
+            public Object execute(RedisOperations redisOperations) throws DataAccessException {
+                redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME),imgAdminReqDto.getUserId().toString());
+                redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME,user.getGender()),user.getId().toString());
+                redisOperations.opsForZSet().remove(getKey(USER_LOGIN_TIME,user.getCountryId()),user.getId().toString());
+                redisOperations.opsForSet().add(systemReportKey, imgAdminReqDto.getUserId().toString());
+                redisOperations.opsForZSet().add(systemReportTimeKey,imgAdminReqDto.getUserId().toString(), DateUtil.getDatePlusHour(new Date(), 6).getTime());
+                return null;
+            }
+        });
+        return getImg(imgAdminReqDto);
     }
 
 

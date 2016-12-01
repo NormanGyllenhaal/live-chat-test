@@ -46,6 +46,9 @@ public class ReportController {
 
 
 
+
+
+
     @RequestMapping(value="disable/user",method = RequestMethod.GET)
     @ResponseBody
     public Page<ReportRecord> getReportRecord(Integer pageNo, Integer pageSize) {

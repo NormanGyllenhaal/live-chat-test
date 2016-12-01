@@ -11,25 +11,25 @@
         </div><!-- /page-title -->
 
 
-
         <ul class="page-stats">
+            <li>共{{pages}}页</li>
             <li style="width:300px;height:70px;">
                 <div class="dropdown form-group">
-                <label>Start Date</label>
-                <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"
-                   href="javascript:;">
-                    <div class="input-group date">
-                        <input type="text" class="form-control" data-ng-model="dateRangeStart">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </div>
-                </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="dateRangeStart"
-                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
-                                    data-on-set-time="startDateOnSetTime(newDate, oldDate)"
-                                    data-before-render="startDateBeforeRender($dates)"></datetimepicker>
-                </ul>
-            </div>
+                    <label>Start Date</label>
+                    <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"
+                       href="javascript:;">
+                        <div class="input-group date">
+                            <input type="text" class="form-control" data-ng-model="dateRangeStart">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="dateRangeStart"
+                                        data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed' }"
+                                        data-on-set-time="startDateOnSetTime(newDate, oldDate)"
+                                        data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                    </ul>
+                </div>
             </li>
             <li style="width:300px;height:70px;">
                 <div class="dropdown form-group">
@@ -51,7 +51,8 @@
             </li>
             <li style="line-height:70px;">
                 性别
-                <select class="form-control input-sm" id="gender-select" ng-model="param.gender" style="display:inline-block; width:100px;">
+                <select class="form-control input-sm" id="gender-select" ng-model="param.gender"
+                        style="display:inline-block; width:100px;">
                     <option value="">全部</option>
                     <option value="1">男</option>
                     <option value="2">女</option>
@@ -59,71 +60,34 @@
             </li>
             <li style="line-height:70px;">
                 图片类型
-                <select class="form-control input-sm" id="type-select" ng-model="param.type" style="display:inline-block; width:100px;">
-                <option value="">全部</option>
-                <option value="1">头像</option>
-                <option value="2">背景</option>
-                 </select>
+                <select class="form-control input-sm" id="type-select" ng-model="param.type"
+                        style="display:inline-block; width:100px;">
+                    <option value="">全部</option>
+                    <option value="1">头像</option>
+                    <option value="2">背景</option>
+                </select>
             </li>
             <li>
-                <a style="line-height:70px;" class="btn btn-primary" ng-click="next()">Next <i class="fa fa-chevron-right"></i></a>
+                <a style="line-height:70px;" class="btn btn-primary" ng-click="next()">Next <i
+                        class="fa fa-chevron-right"></i></a>
             </li>
         </ul><!-- /page-stats -->
     </div><!-- /main-header -->
 
-    <div class="gallery-container" ng-repeat="img in imgList">
-        <div class="gallery-item">
-            <a class="image-wrapper gallery-zoom" href="javascript:;">
-                <img ng-src="{{img.headImg}}" alt=""/>
-                <div class="image-overlay">
-                    <div class="image-info">
-                        <div class="h3">{{img.userName}}</div>
-                        <span>{{img.gender==1?"男":"女"}}  {{img.birthday}} {{img.type==1?"头像":"背景图片"}}</span>
-                        <div class="image-time">{{img.createTime}}</div>
-                        <div class="image-like">
-                            <span>删除</span>
-                            <label class="label-checkbox inline">
-                                <input id={{img.id}} type="checkbox" ng-model="x" ng-checked="master"
-                                       ng-click="chk(img.id,x)" style="width:50px;height:50px;opacity:1;margin:0px">
-                                <span class="custom-checkbox"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </a><!-- /image-wrapper -->
+    <div ng-repeat="img in imgList">
+        <div style="display: inline-block;width: 12%;float: left;overflow: hidden;position:relative;">
+            <img ng-src="{{img.headImg}}" alt="" id="{{img.id + 'image'}}"/>
+            <div style="position:absolute;z-index: 1;left: 10%;bottom:50%;color: #fff;">
+                <button class="btn btn-xs btn-danger" ng-click="offUserAndDelete(img.userId,img.id)"><i
+                        class="fa fa-check"></i> 删除并禁用账号6小时
+                </button>
+                <input id={{img.id}} type="checkbox" ng-model="x" ng-checked="master"
+                       ng-click="chk(img.id,x)" style="width:100%;height:200px;opacity:1;margin:0px;opacity:0;">
+                <div class="h3">{{img.userName}}</div>
+                <span>{{img.gender==1?"男":"女"}}  {{img.birthday}} {{img.type==1?"头像":"背景图片"}}</span>
+                <div>{{img.createTime}}</div>
+            </div>
         </div><!-- /gallery-item -->
     </div><!-- /gallery-container -->
-    <div style="width: 100%;float:left">
-         <ul class="pagination">
-             <li ng-class="{disabled: pagination.isFirst(pagination.currentPage)}"
-                 ng-click="pagination.setCurrent(pagination.startPage)">
-                 <a href>首页</a>
-             </li>
-             <li ng-class="{disabled: !pagination.inRange(pagination.currentPage - 1)}"
-                 ng-click="pagination.setCurrent(pagination.currentPage - 1)">
-                 <a href>上一页</a>
-             </li>
-             <li ng-show="pagination.inRange(pagination.pages[0] - 1)"
-                 ng-click="pagination.setCurrent(pagination.currentPage - pagination.maxNumbers)">
-                 <a href>&hellip;</a>
-             </li>
-             <li ng-repeat="page in pagination.pages track by $index" ng-class="{active: pagination.isCurrent(page)}"
-                 ng-click="pagination.setCurrent(page)">
-                 <a href ng-bind="page"></a>
-             </li>
-             <li ng-show="pagination.inRange(pagination.pages[pagination.pages.length - 1] + 1)"
-                 ng-click="pagination.setCurrent(pagination.currentPage + pagination.maxNumbers)">
-                 <a href>&hellip;</a>
-             </li>
-             <li ng-class="{disabled: !pagination.inRange(pagination.currentPage + 1)}"
-                 ng-click="pagination.setCurrent(pagination.currentPage + 1)">
-                 <a href>下一页</a>
-             </li>
-             <li ng-class="{disabled: pagination.isLast(pagination.currentPage)}"
-                 ng-click="pagination.setCurrent(pagination.endPage)">
-                 <a href>尾页</a>
-             </li>
-         </ul>
-     </div>
 </div>
 

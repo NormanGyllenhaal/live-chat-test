@@ -9,9 +9,13 @@ import java.util.Date;
 public class ImgAdminReqDto {
 
 
+    private Integer userId;
+
+
+    private Integer imageId;
+
 
     private Integer adminId;
-
 
 
     private Integer pageSize;
@@ -92,4 +96,40 @@ public class ImgAdminReqDto {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ImgAdminReqDto{");
+        sb.append("userId=").append(userId);
+        sb.append(", imageId=").append(imageId);
+        sb.append(", adminId=").append(adminId);
+        sb.append(", pageSize=").append(pageSize);
+        sb.append(", pageNo=").append(pageNo);
+        sb.append(", gender=").append(gender);
+        sb.append(", type=").append(type);
+        sb.append(", beginDate=").append(beginDate);
+        sb.append(", endDate=").append(endDate);
+        sb.append('}');
+        return sb.toString();
+    }
 }
+
+

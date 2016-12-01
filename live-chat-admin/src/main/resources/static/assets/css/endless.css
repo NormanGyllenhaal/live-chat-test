@@ -4320,7 +4320,7 @@ input[type="radio"]:active + .custom-radio {
 }
 .gallery-container .gallery-item .image-wrapper {
   width: 100%;
-  padding-top: 130%;
+  padding-top: 100%;
 }
 .gallery-container .gallery-item .image-wrapper img {
   display: block;

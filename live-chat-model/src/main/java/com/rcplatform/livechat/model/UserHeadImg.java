@@ -53,6 +53,12 @@ public class UserHeadImg implements Serializable {
         this.checked = checked;
     }
 
+    public UserHeadImg(Integer checked, Integer handle, Date handleTime) {
+        this.checked = checked;
+        this.handle = handle;
+        this.handleTime = handleTime;
+    }
+
     @Id
     private Integer id;
 

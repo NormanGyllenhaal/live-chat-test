@@ -24,4 +24,9 @@ public interface IUserHeadImgService {
      * @return
      */
    Page handleImg(UserHeadImgReqDto userHeadImgReqDto);
+
+
+
+
+    Page forbidUser(ImgAdminReqDto imgAdminReqDto);
 }
